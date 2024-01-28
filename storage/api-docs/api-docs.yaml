@@ -1,0 +1,1936 @@
+openapi: 3.0.0
+info:
+  title: 'Spotdesking API'
+  description: 'Spotdesking [Aka QRCLEAN] API Description'
+  version: 1.0.0
+servers:
+  -
+    url: /api
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Autorizacion
+      summary: 'Inicia sesion para el usuario y devuelve el token de acceso'
+      operationId: cdf452d2ed99a23c8464e289c7fce73b
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  description: username
+                  type: string
+                password:
+                  description: password
+                  type: string
+                remember_me:
+                  description: remember_me
+                  type: boolean
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                    result:
+                      description: 'Resultado de la operacion'
+                      type: string
+                      enum:
+                      - ok
+                    timestamp:
+                      description: 'Fecha de ejecucion de la accion'
+                      type: string
+                      format: date-time
+                    access_token: 
+                      type: string
+                    token_type: 
+                      type: string
+                    expires_at: 
+                      type: string
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+        401:
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /auth/logout:
+    get:
+      tags:
+        - Autorizacion
+      summary: 'Cerrar sesion para el usuario actual'
+      operationId: d7b22dfe8ef07f2fa0268b7b6349663a
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                  message:
+                    description: 'Mensaje de resultado de la operacion'
+                    type: string
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /auth/user:
+    get:
+      tags:
+        - Autorizacion
+      summary: 'Obtiene los datos del usuario actual'
+      operationId: 04ff6d178635c85a0486987fea31407d
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                  id: 
+                    type: integer
+                    format: int32
+                  name: 
+                    type: string
+                  email: 
+                    type: string
+                  email_verified_at: 
+                    type: string
+                  created_at: 
+                    type: string
+                  updated_at: 
+                    type: string
+                  img_usuario: 
+                    type: string
+                  cod_nivel: 
+                    type: integer
+                    format: int32
+                  theme: 
+                    type: string
+                    format: nullable
+                  collapse: 
+                    type: integer
+                    format: int32
+                  last_login: 
+                    type: string
+                  nivel_acceso: 
+                    type: integer
+                    format: int32
+                  id_cliente: 
+                    type: integer
+                    format: int32
+                  val_timezone: 
+                    type: string
+                  token_acceso: 
+                    type: string
+                  def_camera: 
+                    type: string
+                  email_expire_at: 
+                    type: string
+                    format: nullable
+                  id_usuario_supervisor: 
+                    type: string
+                    format: nullable
+                  val_vista_puestos: 
+                    type: string
+                  token_expires: 
+                    type: integer
+                    format: int32
+                  id_externo: 
+                    type: string
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /test:
+    get:
+      tags:
+        - Generales
+      summary: 'Consulta de test de la API'
+      operationId: 4eb3b6fe3d9afedc81e22d5e90a95955
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                  message:
+                    description: 'Mensaje de resultado de la operacion'
+                    type: string
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /entidades:
+    get:
+      tags:
+        - Generales
+      summary: 'Consulta de entidades del cliente'
+      operationId: c6ad5f09c8caa3b92afa2cb6cb0aa6ef
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties: 
+                  result: 
+                    type: string
+                  timestamp: 
+                    type: string
+                    format: date-time
+                  edificios: 
+                    type: array
+                    items: 
+                      type: object
+                      properties: 
+                        id_edificio: 
+                          type: integer
+                          format: int32
+                        des_edificio: 
+                          type: string
+                        abreviatura: 
+                          type: string
+                        plantas: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              id_planta: 
+                                type: integer
+                                format: int32
+                              des_planta: 
+                                type: string
+                              id_edificio: 
+                                type: integer
+                                format: int32
+                              num_orden: 
+                                type: integer
+                                format: int32
+                              abreviatura: 
+                                type: string
+                              puestos: 
+                                type: array
+                                items: 
+                                  type: object
+                                  properties: 
+                                    id_planta: 
+                                      type: integer
+                                      format: int32
+                                    id_puesto: 
+                                      type: integer
+                                      format: int32
+                                    cod_puesto: 
+                                      type: string
+                                    des_puesto: 
+                                      type: string
+                                    id_estado: 
+                                      type: integer
+                                      format: int32
+                                    id_tipo_puesto: 
+                                      type: integer
+                                      format: int32
+                                    mca_incidencia: 
+                                      type: string
+                                    des_estado: 
+                                      type: string
+                                    hex_color: 
+                                      type: string
+                                    icono_tipo: 
+                                      type: string
+                                    color_tipo: 
+                                      type: string
+                        tipos_puesto: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              id_tipo_puesto: 
+                                type: integer
+                                format: int32
+                              des_tipo_puesto: 
+                                type: string
+                              val_icono: 
+                                type: string
+                              val_color: 
+                                type: string
+                              abreviatura: 
+                                type: string
+                        tipos_incidencia: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              id_tipo_incidencia: 
+                                type: integer
+                                format: int32
+                              des_tipo_incidencia: 
+                                type: string
+                              val_icono: 
+                                type: string
+                              val_color: 
+                                type: string
+                              list_tipo_puesto: 
+                                type: string
+                                format: nullable
+                              id_tipo_externo: 
+                                type: string
+                                format: nullable
+                              id_tipo_salas: 
+                                type: string
+                                format: nullable
+                              val_responsable: 
+                                type: string
+                                format: nullable
+                        causas_cierre: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              id_causa_cierre: 
+                                type: integer
+                                format: int32
+                              des_causa: 
+                                type: string
+                              val_icono: 
+                                type: string
+                              val_color: 
+                                type: string
+                              mca_default: 
+                                type: string
+                              id_externo: 
+                                type: string
+                        estados_incidencia: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              id_estado: 
+                                type: integer
+                                format: int32
+                              des_estado: 
+                                type: string
+                              val_icono: 
+                                type: string
+                              val_color: 
+                                type: string
+                              mca_cierre: 
+                                type: string
+                        perfiles: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              cod_nivel: 
+                                type: integer
+                                format: int32
+                              val_nivel_acceso: 
+                                type: integer
+                                format: int32
+                              des_nivel_acceso: 
+                                type: string
+                        colectivos: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              cod_colectivo: 
+                                type: integer
+                                format: int32
+                              des_colectivo: 
+                                type: string
+                        departamentos: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              cod_departamento: 
+                                type: integer
+                                format: int32
+                              nom_departamento: 
+                                type: string
+                              cod_departamento_padre: 
+                                type: integer
+                                format: int32
+                        turnos: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              id_turno: 
+                                type: integer
+                                format: int32
+                              des_turno: 
+                                type: string
+                              fec_inicio: 
+                                type: string
+                                format: date
+                              fec_fin: 
+                                type: string
+                                format: date
+                              dias_semana:
+                                  type: array
+                                  items: 
+                                    type: object
+                                    properties: 
+                                      dia: 
+                                        type: array
+                                        items:
+                                          type: integer
+                                      hora_inicio: 
+                                        type: array
+                                        items:
+                                          type: string
+                                          format: time
+                                      hora_fin: 
+                                        type: array
+                                        items:
+                                          type: string
+                                          format: time
+                                      mod_semana: 
+                                        type: array
+                                        items:
+                                          type: integer
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /incidencias/list:
+    post:
+      tags:
+        - 'Gestion de incidencias'
+      summary: 'Devuelve las incidencias de un cliente segun los filtros'
+      operationId: ce3cca75d635b0c97f8b5abc0935e5ec
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                fec_desde:
+                  description: 'Fecha de inicio de la consulta'
+                  type: string
+                  format: date
+                fec_hasta:
+                  description: 'Fecha de fin de la consulta'
+                  type: string
+                  format: date
+                tipoinc:
+                  description: 'IDs de tipo de incidencia'
+                  type: array
+                  items:
+                    type: integer
+                id_estado:
+                  description: 'IDS de estado de la incidencia'
+                  type: array
+                  items:
+                    type: integer
+                puesto:
+                  description: 'Puestos afectado por la incidencia'
+                  type: array
+                  items:
+                    type: integer
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                    result: 
+                      type: string
+                    timestamp: 
+                      type: string
+                      format: date-time
+                    incidencias: 
+                      type: array
+                      items: 
+                        type: object
+                        properties: 
+                          id_incidencia: 
+                            type: integer
+                            format: int32
+                          id_externo: 
+                            type: string
+                            format: nullable
+                          id_incidencia_salas: 
+                            type: string
+                            format: nullable
+                          des_incidencia: 
+                            type: string
+                          txt_incidencia: 
+                            type: string
+                          fec_apertura: 
+                            type: string
+                          fec_cierre: 
+                            type: string
+                          id_tipo_incidencia: 
+                            type: integer
+                            format: int32
+                          id_puesto: 
+                            type: integer
+                            format: int32
+                          id_causa_cierre: 
+                            type: integer
+                            format: int32
+                          comentario_cierre: 
+                            type: string
+                          id_estado: 
+                            type: string
+                            format: nullable
+                          id_usuario_apertura: 
+                            type: integer
+                            format: int32
+                          id_usuario_ext: 
+                            type: string
+                          acciones: 
+                            type: array
+                            items: 
+                              type: object
+                              properties: 
+                                id_accion: 
+                                  type: integer
+                                  format: int32
+                                des_accion: 
+                                  type: string
+                                fec_accion: 
+                                  type: string
+                                id_usuario: 
+                                  type: integer
+                                  format: int32
+                                mca_resuelve: 
+                                  type: string
+                                id_usuario_ext: 
+                                  type: string
+                    solicitudes: 
+                      type: array
+                      items: 
+                        type: object
+                        properties: 
+                          id_incidencia: 
+                            type: integer
+                            format: int32
+                          id_externo: 
+                            type: string
+                            format: nullable
+                          id_incidencia_salas: 
+                            type: string
+                            format: nullable
+                          des_incidencia: 
+                            type: string
+                          txt_incidencia: 
+                            type: string
+                          fec_apertura: 
+                            type: string
+                          fec_cierre: 
+                            type: string
+                          id_tipo_incidencia: 
+                            type: integer
+                            format: int32
+                          id_puesto: 
+                            type: integer
+                            format: int32
+                          id_causa_cierre: 
+                            type: integer
+                            format: int32
+                          comentario_cierre: 
+                            type: string
+                          id_estado: 
+                            type: string
+                            format: nullable
+                          id_usuario_apertura: 
+                            type: integer
+                            format: int32
+                          id_usuario_ext: 
+                            type: string
+                          val_presupuesto: 
+                            type: string
+                          val_proyecto: 
+                            type: string
+                          val_importe: 
+                            type: string
+                          acciones: 
+                            type: array
+                            items: 
+                              type: object
+                              properties: 
+                                id_accion: 
+                                  type: integer
+                                  format: int32
+                                des_accion: 
+                                  type: string
+                                fec_accion: 
+                                  type: string
+                                id_usuario: 
+                                  type: integer
+                                  format: int32
+                                mca_resuelve: 
+                                  type: string
+                                id_usuario_ext: 
+                                  type: string
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /incidencias:
+    put:
+      tags:
+        - 'Gestion de incidencias'
+      summary: 'Crea una nueva incidencia'
+      operationId: 6ea67fd97a9a7a01811166734128de38
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - des_incidencia
+                - id_tipo_incidencia
+                - id_puesto
+                - id_usuario_apertura
+              properties:
+                des_incidencia:
+                  description: 'Tiutulo de la incidencia'
+                  type: string
+                  maxLength: 500
+                txt_incidencia:
+                  description: 'Texto descriptivo  de la incidencia'
+                  type: string
+                  maxLength: 65535
+                id_incidencia_externo:
+                  description: 'ID externo'
+                  type: number
+                  maxLength: 100
+                id_tipo_incidencia:
+                  description: 'Tipo de la incidencia'
+                  type: number
+                id_estado:
+                  description: 'ID Estado de la incidencia'
+                  type: number
+                id_puesto:
+                  description: 'ID Puesto afectado por la incidencia'
+                  type: string
+                id_usuario_apertura:
+                  description: 'ID de usuario que abre la incidencia'
+                  type: string
+                url:
+                  description: 'Url para acceder al detalle de la incidencia'
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                  message:
+                    description: 'Mensaje de resultado de la operacion'
+                    type: string
+                  id:
+                    description: 'Identificador de la incidencia creada'
+                    type: number
+                  url:
+                    description: 'URL de seguimiento de la incidencia'
+                    type: string
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /incidencias/add_accion:
+    post:
+      tags:
+        - 'Gestion de incidencias'
+      summary: 'Añade una nueva accion a la  incidencia'
+      operationId: d9fc6df7a072aef44b9e973583a8ce6f
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - id_incidencia
+                - id_usuario
+                - des_accion
+              properties:
+                id_incidencia:
+                  description: 'ID de incidencia'
+                  type: number
+                id_estado:
+                  description: 'ID Estado al que cambia la  incidencia'
+                  type: number
+                des_accion:
+                  description: 'Texto  de la accion'
+                  type: string
+                  maxLength: 2000
+                id_usuario:
+                  description: 'ID de usuario que realiza la accion'
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                  message:
+                    description: 'Mensaje de resultado de la operacion'
+                    type: string
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /incidencias/cerrar:
+    post:
+      tags:
+        - 'Gestion de incidencias'
+      summary: 'Cierra una incidencia'
+      operationId: 44431499f5397ec72f4a8ba70b43bbf5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - id_incidencia
+                - id_usuario
+              properties:
+                id_incidencia:
+                  description: 'ID de incidencia'
+                  type: number
+                comentario_cierre:
+                  description: 'Comentario de cierre de la incidencia'
+                  type: string
+                  maxLength: 65535
+                id_usuario:
+                  description: 'ID de usuario que realiza la accion'
+                  type: string
+                id_causa_cierre:
+                  description: 'Identificador de causa de cierre'
+                  type: number
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                  id:
+                    description: 'Identificador de la incidencia'
+                    type: number
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /incidencias/reabrir:
+    post:
+      tags:
+        - 'Gestion de incidencias'
+      summary: 'Reabre una incidencia cerrada'
+      operationId: 85ccb003c4c39eccd97caf3fedfe0180
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - id_incidencia
+                - id_usuario
+              properties:
+                id_incidencia:
+                  description: 'ID de incidencia'
+                  type: number
+                id_usuario:
+                  description: 'ID de usuario que realiza la accion'
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                  id:
+                    description: 'Identificador de la incidencia'
+                    type: number
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /salas/sincronizar_estructura_incidencias_empresa_desde_fecha:
+    get:
+      tags:
+        - 'Integracion con salas'
+      summary: 'Solicitud de sincronización de información estructural de incidencias (Por cambios en salas, departamentos o tipos de incidencias)'
+      operationId: 50178506ff2858dd658eb11de4c7ed46
+      parameters:
+        -
+          name: fecha
+          in: path
+          description: 'Fecha de incicio de la consulta'
+          required: true
+        -
+          name: id_cliente
+          in: path
+          description: 'Identificador de cliente'
+          required: true
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /salas/add_incidencia_empresa:
+    post:
+      tags:
+        - 'Integracion con salas'
+      summary: 'Crea una nueva incidencia desde gestion de salas'
+      operationId: 2547ba5e9f70585c13dffd3dd7f88b75
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - id_cliente
+                - sala_id
+                - fecha
+                - descripcion_adicional
+                - estado
+                - incidencia_sala_id
+                - tipo_incidencia_id
+              properties:
+                id_cliente:
+                  description: 'ID de cliente'
+                  type: integer
+                sala_id:
+                  description: 'ID de sala'
+                  type: integer
+                fecha:
+                  description: 'Fecha de incio de la incidencia'
+                  type: string
+                  format: date-time
+                descripcion_adicional:
+                  description: 'Titulo de la incidencia'
+                  type: string
+                  maxLength: 500
+                tipo_incidencia_id:
+                  description: 'ID de tipo de incidencia'
+                  type: integer
+                estado:
+                  description: 'ID de estado de la incidencia'
+                  type: integer
+                reunion_anterior:
+                  description: 'Datos de la reunion anterior'
+                  type: string
+                reunion_actual:
+                  description: 'Datos de la reunion actual'
+                  type: string
+                reunion_posterior:
+                  description: 'Datos de la reunion posteriore'
+                  type: string
+                notas_admin:
+                  description: 'Detalle de la incidencia'
+                  type: string
+                  maxLength: 65535
+                incidencia_sala_id:
+                  description: 'ID de la incidencia en salas'
+                  type: integer
+                  maxLength: 65535
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /salas/set_incidencia_empresa:
+      post:
+        tags:
+          - 'Integracion con salas'
+        summary: 'Modifica una incidencia existente desde salas'
+        operationId: 5d065c7fd30d2547ba5e9f70585c13dffd3dd7f88b75
+        requestBody:
+          required: true
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                required:
+                  - id_cliente
+                  - fecha
+                  - estado
+                  - incidencia_sala_id
+                  - incidencia_id_puestos
+                properties:
+                  id_cliente:
+                    description: 'ID de cliente'
+                    type: integer
+                  fecha:
+                    description: 'Fecha de incio de la incidencia'
+                    type: string
+                    format: date-time
+                  estado:
+                    description: 'ID de estado de la incidencia'
+                    type: string
+                  notas_admin:
+                    description: 'Detalle de la incidencia'
+                    type: integer
+                    maxLength: 65535
+                  incidencia_sala_id:
+                    description: 'ID de la incidencia en salas'
+                    type: string
+                  incidencia_id_puestos:
+                    description: 'ID de incidencia en puestos'
+                    type: integer
+                type: object
+        responses:
+          200:
+            description: 'Successful operation'
+            content:
+              application/json:
+                schema:
+                  properties:
+                    result:
+                      description: 'Resultado de la operacion'
+                      type: string
+                      enum:
+                      - ok
+                    timestamp:
+                      description: 'Fecha de ejecucion de la accion'
+                      type: string
+                      format: date-time
+                  type: object
+          400:
+            description: 'Error en la peticion'
+            content:
+              application/json:
+                schema:
+                  properties:
+                    result:
+                      description: 'Resultado de la operacion'
+                      type: string
+                      enum:
+                      - error
+                    error:
+                      description: 'Descripcion del error'
+                      type: string
+                    timestamp:
+                      description: 'Fecha de ejecucion de la accion'
+                      type: string
+                      format: date-time
+                  type: object
+        security:
+          -
+            passport: []
+  /salas/sincronizar_incidencias_desde_fecha:
+    get:
+      tags:
+        - 'Integracion con salas'
+      summary: 'Lanza el proceso de sincronizacion de incidencias'
+      operationId: dfbe31a6a86e5d065c7fd30d2547ba5e9f70585c13dffd3dd7f88b75
+      parameters:
+      -
+        name: fecha
+        in: path
+        description: 'Fecha de incicio de la consulta'
+        type: string
+        format: date-time
+        example: '1900-01-01T15:00:01.123+0200'
+        required: true
+      -
+        name: id_cliente
+        in: path
+        description: 'Identificador de cliente'
+        required: true
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /salas/get_incidencias_desde_fecha:
+    get:
+      tags:
+        - 'Integracion con salas'
+      summary: 'Devuelve el listado de incidencias desde la fecha solicitada'
+      operationId: dfbe31a6a86e5d065c7fd30d2547ba5e9f70585c13dffd3dd7f88b75
+      parameters:
+      -
+        name: fecha
+        in: path
+        description: 'Fecha de incicio de la consulta'
+        format: date-time
+        example: '1900-01-01T15:00:01.123+0200'
+        required: true
+      -
+        name: id_cliente
+        in: path
+        description: 'Identificador de cliente'
+        required: true
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                    result: 
+                      type: string
+                    timestamp: 
+                      type: string
+                      format: date-time
+                    a_incidencias_pendientes: 
+                      type: array
+                      items: 
+                        type: object
+                        properties: 
+                          sala_id: 
+                            type: integer
+                            format: int32
+                          fecha: 
+                            type: string
+                            format: date-time
+                          descripcion_adicional: 
+                            type: string
+                          tipo_incidencia_id: 
+                            type: integer
+                            format: int32
+                          estado: 
+                            type: integer
+                            format: int32
+                          notas_admin: 
+                            type: string
+                          incidencia_id_puestos: 
+                            type: integer
+                            format: int32
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /salas/add_incidencia_id_puestos_pendientes:
+    post:
+      tags:
+        - 'Integracion con salas'
+      summary: 'Recibe los pares de ID de incidencie en puestos y en salas para emparejar las que falten'
+      operationId: UCQMBWIWn4Q2547ba5e9f70585c13dffd3dd7f88b75
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - incidencias
+                - id_cliente
+              properties:
+                id_cliente:
+                  description: 'ID de cliente'
+                  type: integer
+                incidencias:
+                  description: 'Lista de pares de incidencia'
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      incidencia_sala_id:
+                        description: 'ID de la incidencia en salas'
+                        type: integer
+                      incidencia_puestos_id:
+                        description: 'ID de la incidencia en salas'
+                        type: integer
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /users/list:
+      post:
+        tags:
+          - Gestion de usuarios
+        summary: 'Listado de usuarios del cliente'
+        operationId: b934e805ea18c6ad5f09c8caa3b92afa2cb6cb0aa6ef
+        requestBody:
+          content:
+            application/json:
+              schema:
+                properties:
+                  cliente:
+                    description: 'IDs de cliente de los que se quiere obtener el listado de usuarios'
+                    type: array
+                    items:
+                      type: integer
+                  edificio:
+                    description: 'IDs de edificio al que pertenezcan los usuarios'
+                    type: array
+                    items:
+                      type: integer
+                  planta:
+                    description: 'IDs de planta al que pertenezcan los usuarios'
+                    type: array
+                    items:
+                      type: integer
+                  cod_nivel:
+                    description: 'IDs de perfil al que pertenezcan los usuarios'
+                    type: array
+                    items:
+                      type: integer
+                  id_departamento:
+                    description: 'IDs de departamento al que pertenezcan los usuarios'
+                    type: array
+                    items:
+                      type: integer
+                  cod_colectivo:
+                    description: 'IDs de colectivo  al que pertenezcan los usuarios'
+                    type: array
+                    items:
+                      type: integer
+                  user:
+                    description: 'IDS de usuario concretos que se quiere obtener'
+                    type: array
+                    items:
+                      type: integer
+                type: object
+        responses:
+          200:
+            description: 'Successful operation'
+            content:
+              application/json:
+                schema:
+                  properties: 
+                    result: 
+                      type: string
+                    timestamp: 
+                      type: string
+                      format: date-time
+                    usuarios: 
+                      type: array
+                      items: 
+                        type: object
+                        properties: 
+                          id: 
+                            type: integer
+                            format: int32
+                          name: 
+                            type: string
+                          email: 
+                            type: string
+                          created_at:
+                            type: string
+                            format: date-time
+                          img_usuario: 
+                            type: string
+                          cod_nivel: 
+                            type: integer
+                            format: int32
+                          last_login: 
+                            type: string
+                            format: date-time
+                          id_cliente: 
+                            type: integer
+                            format: int32
+                          val_timezone: 
+                            type: string
+                          id_usuario_supervisor: 
+                            type: integer
+                            format: int32
+                          id_usuario_externo: 
+                            type: integer
+                            format: int32
+                          id_edificio: 
+                            type: integer
+                            format: int32
+                          id_departamento: 
+                            type: integer
+                            format: int32
+                          mca_notif_push: 
+                            type: string
+                            enum: [S, N]
+                          mca_notif_email: 
+                            type: string
+                            enum: [S, N]
+                          deleted_at: 
+                            type: string
+                            format: date-time
+                          
+                  type: object
+          400:
+            description: 'Error en la peticion'
+            content:
+              application/json:
+                schema:
+                  properties:
+                    result:
+                      description: 'Resultado de la operacion'
+                      type: string
+                      enum:
+                      - error
+                    error:
+                      description: 'Descripcion del error'
+                      type: string
+                    timestamp:
+                      description: 'Fecha de ejecucion de la accion'
+                      type: string
+                      format: date-time
+                  type: object
+        security:
+          -
+            passport: []
+  /users:
+    put:
+      tags:
+        - 'Gestion de usuarios'
+      summary: 'Crea un nuevo usuario'
+      operationId: 8be14fbc894allLtonHZlFAx56ea67fd97a9a7a01811166734128de38
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - email
+                - password
+                - cod_nivel
+                - id_cliente
+                - id_edificio
+                - id_departamento
+                - val_timezone
+
+              properties:
+                name:
+                  description: 'Nombre completo del usuario'
+                  type: string
+                  maxLength: 255
+                email:
+                  description: 'e-mail del usuario'
+                  type: string
+                  maxLength: 190
+                img_usuario:
+                  description: 'Imagen del usuario'
+                  type: string
+                  maxLength: 200
+                cod_nivel:
+                  description: 'ID de perfil del usuario'
+                  type: number
+                id_cliente:
+                  description: 'ID de cliente del usuario'
+                  type: number
+                id_edificio:
+                  description: 'ID de edificio al cual esta adscrito el usuario'
+                  type: string
+                id_departamento:
+                  description: 'ID de departamento al cual pertenece'
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                  message:
+                    description: 'Mensaje de resultado de la operacion'
+                    type: string
+                  id:
+                    description: 'Identificador del usuario creado'
+                    type: number
+                  url:
+                    description: 'URL base de consulta'
+                    type: string
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+    post:
+      tags:
+        - 'Gestion de usuarios'
+      summary: 'Actualiza un usuario'
+      operationId: 1485c9f1b8df8be14fbc894allLtonHZlFAx56ea67fd97a9a7a01811166734128de38
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - id
+                - name
+                - email
+                - password
+                - cod_nivel
+                - id_cliente
+                - id_edificio
+                - id_departamento
+                - val_timezone
+
+              properties:
+                id:
+                  description: 'ID del usuario a actualizar'
+                  type: number
+                name:
+                  description: 'Nombre completo del usuario'
+                  type: string
+                  maxLength: 255
+                email:
+                  description: 'e-mail del usuario'
+                  type: string
+                  maxLength: 190
+                img_usuario:
+                  description: 'Imagen del usuario'
+                  type: string
+                  maxLength: 200
+                cod_nivel:
+                  description: 'ID de perfil del usuario'
+                  type: number
+                id_cliente:
+                  description: 'ID de cliente del usuario'
+                  type: number
+                id_edificio:
+                  description: 'ID de edificio al cual esta adscrito el usuario'
+                  type: string
+                id_departamento:
+                  description: 'ID de departamento al cual pertenece'
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                  message:
+                    description: 'Mensaje de resultado de la operacion'
+                    type: string
+                  id:
+                    description: 'Identificador del usuario afectado'
+                    type: number
+                  url:
+                    description: 'URL base de consulta'
+                    type: string
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /users/soft:
+    delete:
+      tags:
+        - 'Gestion de usuarios'
+      summary: 'Borrado logico de un usuario'
+      operationId: e635d938352b44431499f5397ec72f4a8ba70b43bbf5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - id
+              properties:
+                id:
+                  description: 'ID del usuario a borrar'
+                  type: number
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+  /users/hard:
+    delete:
+      tags:
+        - 'Gestion de usuarios'
+      summary: 'Borrado fisico de un usuario'
+      operationId: c59caed857a9e635d938352b44431499f5397ec72f4a8ba70b43bbf5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - id
+              properties:
+                id:
+                  description: 'ID del usuario a borrar'
+                  type: number
+              type: object
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - ok
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+        400:
+          description: 'Error en la peticion'
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    description: 'Resultado de la operacion'
+                    type: string
+                    enum:
+                    - error
+                  error:
+                    description: 'Descripcion del error'
+                    type: string
+                  timestamp:
+                    description: 'Fecha de ejecucion de la accion'
+                    type: string
+                    format: date-time
+                type: object
+      security:
+        -
+          passport: []
+tags:
+  -
+    name: Autorizacion
+    description: 'Consultas relacionadas con la autorización de usuarios para el API'
+  -
+    name: Generales
+    description: 'Consulta de datos existentes en la plataforma'
+  -
+    name: 'Gestion de incidencias'
+    description: 'Consulta de para la gestion de incidencias generica'
+  -
+    name: 'Integracion con salas'
+    description: 'Consulta de para la integracion con gestion de salas'
+  -
+    name: 'Gestion de usuarios'
+    description: 'Consulta de para la gestion de usuarios de la plataforma'
+components:
+  securitySchemes:
+    passport:
+      type: oauth2
+      description: 'Laravel passport oauth2 security.'
+      in: header
+      scheme: https
+      flows:
+        password:
+          authorizationUrl: '/api/auth/login'
+          tokenUrl: '/api/auth/login'
+          refreshUrl: '/api/auth/token/refresh'
+          scopes: []

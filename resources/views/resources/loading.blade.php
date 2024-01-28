@@ -1,0 +1,1 @@
+<span class="float-right {{ $clase }}" id="{{ $id_spin }}" style="display: none"><img src="{{ url('/img/loading.gif') }}" style="height: 25px;">{{ $texto??'LOADING...' }}</span>

@@ -1,0 +1,307 @@
+[
+    {
+        "model-name": "camaras",
+        "resource-file": "camaras.json",
+        "table-name": "camaras"
+    },
+    {
+        "model-name": "logpuestos",
+        "resource-file": "logpuestos.json",
+        "table-name": "log_cambios_estado"
+    },
+    {
+        "model-name": "bitacora",
+        "resource-file": "bitacoras.json",
+        "table-name": "bitacora"
+    },
+    {
+        "model-name": "estados",
+        "resource-file": "estados.json",
+        "table-name": "estados_puestos"
+    },
+    {
+        "model-name": "limpiadores",
+        "resource-file": "limpiadores.json",
+        "table-name": "limpiadores_ronda"
+    },
+    {
+        "model-name": "rondas",
+        "resource-file": "rondas.json",
+        "table-name": "rondas_limpieza"
+    },
+    {
+        "model-name": "puestos_ronda",
+        "resource-file": "puestos_rondas.json",
+        "table-name": "puestos_ronda"
+    },
+    {
+        "model-name": "reservas",
+        "resource-file": "reservas.json",
+        "table-name": "reservas"
+    },
+    {
+        "model-name": "plantas_usuario",
+        "resource-file": "plantas_usuarios.json",
+        "table-name": "plantas_usuario"
+    },
+    {
+        "model-name": "tags_puestos",
+        "resource-file": "tags_puestos.json",
+        "table-name": "tags_puestos"
+    },
+    {
+        "model-name": "tareas_programadas",
+        "resource-file": "tareas_programadas.json",
+        "table-name": "tareas"
+    },
+    {
+        "model-name": "tareas",
+        "resource-file": "tareas.json",
+        "table-name": "tareas_programadas"
+    },
+    {
+        "model-name": "logtarea",
+        "resource-file": "logtareas.json",
+        "table-name": "tareas_programadas_log"
+    },
+    {
+        "model-name": "incidencias_acciones",
+        "resource-file": "incidencias_acciones.json",
+        "table-name": "incidencias_acciones"
+    },
+    {
+        "model-name": "puestos_asignados",
+        "resource-file": "puestos_asignados.json",
+        "table-name": "puestos_asignados"
+    },
+    {
+        "model-name": "encuestas_resultados",
+        "resource-file": "encuestas_resultados.json",
+        "table-name": "encuestas_resultados"
+    },
+    {
+        "model-name": "encuestas",
+        "resource-file": "encuestas.json",
+        "table-name": "encuestas"
+    },
+    {
+        "model-name": "tags",
+        "resource-file": "tags.json",
+        "table-name": "tags"
+    },
+    {
+        "model-name": "config_clientes",
+        "resource-file": "config_clientes.json",
+        "table-name": "config_clientes"
+    },
+    {
+        "model-name": "ferias",
+        "resource-file": "ferias.json",
+        "table-name": "ferias"
+    },
+    {
+        "model-name": "ferias_marcas",
+        "resource-file": "ferias_marcas.json",
+        "table-name": "marcas"
+    },
+    {
+        "model-name": "contactos",
+        "resource-file": "contactos.json",
+        "table-name": "contactos"
+    },
+    {
+        "model-name": "marcas",
+        "resource-file": "marcas.json",
+        "table-name": "ferias_marcas"
+    },
+    {
+        "model-name": "contactos_producto",
+        "resource-file": "contactos_productos.json",
+        "table-name": "contactos_producto"
+    },
+    {
+        "model-name": "incidencias_tipos",
+        "resource-file": "incidencias_tipos.json",
+        "table-name": "incidencias_tipos"
+    },
+    {
+        "model-name": "incidencias",
+        "resource-file": "incidencias.json",
+        "table-name": "incidencias"
+    },
+    {
+        "model-name": "causas_cierre",
+        "resource-file": "causas_cierres.json",
+        "table-name": "causas_cierre"
+    },
+    {
+        "model-name": "estados_incidencias",
+        "resource-file": "estados_incidencias.json",
+        "table-name": "estados_incidencias"
+    },
+    {
+        "model-name": "clientes",
+        "resource-file": "clientes.json",
+        "table-name": "clientes"
+    },
+    {
+        "model-name": "salas",
+        "resource-file": "salas.json",
+        "table-name": "salas"
+    },
+    {
+        "model-name": "festivos",
+        "resource-file": "festivos.json",
+        "table-name": "festivos"
+    },
+    {
+        "model-name": "paises",
+        "resource-file": "paises.json",
+        "table-name": "paises"
+    },
+    {
+        "model-name": "provincias",
+        "resource-file": "provincias.json",
+        "table-name": "provincias"
+    },
+    {
+        "model-name": "regiones",
+        "resource-file": "regiones.json",
+        "table-name": "regiones"
+    },
+    {
+        "model-name": "edificios",
+        "resource-file": "edificios.json",
+        "table-name": "edificios"
+    },
+    {
+        "model-name": "turnos",
+        "resource-file": "turnos.json",
+        "table-name": "turnos"
+    },
+    {
+        "model-name": "turnos_usuarios",
+        "resource-file": "turnos_usuarios.json",
+        "table-name": "turnos_usuarios"
+    },
+    {
+        "model-name": "niveles_acceso",
+        "resource-file": "niveles_accesos.json",
+        "table-name": "niveles_acceso"
+    },
+    {
+        "model-name": "puestos_tipos",
+        "resource-file": "puestos_tipos.json",
+        "table-name": "puestos_tipos"
+    },
+    {
+        "model-name": "informes_programados",
+        "resource-file": "informes_programados.json",
+        "table-name": "informes_programados"
+    },
+    {
+        "model-name": "puestos",
+        "resource-file": "puestos.json",
+        "table-name": "puestos"
+    },
+    {
+        "model-name": "plantas_zonas",
+        "resource-file": "plantas_zonas.json",
+        "table-name": "plantas_zonas"
+    },
+    {
+        "model-name": "users",
+        "resource-file": "users.json",
+        "table-name": "users"
+    },
+    {
+        "model-name": "departamentos",
+        "resource-file": "departamentos.json",
+        "table-name": "departamentos"
+    },
+    {
+        "model-name": "colectivos",
+        "resource-file": "colectivos.json",
+        "table-name": "colectivos"
+    },
+    {
+        "model-name": "plantas",
+        "resource-file": "plantas.json",
+        "table-name": "plantas"
+    },
+    {
+        "model-name": "notificaciones_tipos",
+        "resource-file": "notificaciones_tipos.json",
+        "table-name": "notificaciones_tipos"
+    },
+    {
+        "model-name": "notif",
+        "resource-file": "notifs.json",
+        "table-name": "notificaciones"
+    },
+    {
+        "model-name": "trabajos",
+        "resource-file": "trabajos.json",
+        "table-name": "trabajos"
+    },
+    {
+        "model-name": "trabajos_tipos",
+        "resource-file": "trabajos_tipos.json",
+        "table-name": "trabajos_tipos"
+    },
+    {
+        "model-name": "trabajos_grupos",
+        "resource-file": "trabajos_grupos.json",
+        "table-name": "trabajos_grupos"
+    },
+    {
+        "model-name": "grupos_trabajos",
+        "resource-file": "grupos_trabajos.json",
+        "table-name": "grupos"
+    },
+    {
+        "model-name": "grupos",
+        "resource-file": "grupos.json",
+        "table-name": "grupos_trabajos"
+    },
+    {
+        "model-name": "operarios",
+        "resource-file": "operarios.json",
+        "table-name": "contratas_operarios"
+    },
+    {
+        "model-name": "contratas",
+        "resource-file": "contratas.json",
+        "table-name": "contratas"
+    },
+    {
+        "model-name": "planes",
+        "resource-file": "planes.json",
+        "table-name": "trabajos_planes"
+    },
+    {
+        "model-name": "planes_detalle",
+        "resource-file": "planes_detalles.json",
+        "table-name": "trabajos_planes_detalle"
+    },
+    {
+        "model-name": "trabajos_programacion",
+        "resource-file": "trabajos_programacions.json",
+        "table-name": "trabajos_programacion"
+    },
+    {
+        "model-name": "bloqueos",
+        "resource-file": "bloqueos.json",
+        "table-name": "bloqueo_programado"
+    },
+    {
+        "model-name": "bloqueo_puestos",
+        "resource-file": "bloqueo_puestos.json",
+        "table-name": "bloqueo_puestos"
+    },
+    {
+        "model-name": "incidencias_postprocesado",
+        "resource-file": "incidencias_postprocesados.json",
+        "table-name": "incidencias_postprocesado"
+    }
+]

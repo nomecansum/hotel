@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: fn</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Namespace: fn</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+            <span class="ancestors"><a href="jQuery.html">jQuery</a>.</span>fn</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Namespace for jQuery plug-ins.</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jquery-progresspiesvg.js.html">jquery-progresspiesvg.js</a>, <a href="jquery-progresspiesvg.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="http://jquery.com/">http://jquery.com/</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Namespaces</h3>
+
+        <dl>
+            <dt><a href="jQuery.fn.progressPie.html">progressPie</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".progressPie()"><span class="type-signature">(static) </span>progressPie()<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    This plug-in may be used to draw a piechart with only one filled pie (rest empty). 
+It is designed to be an alternative to a progress bar, since it simply depicts a single value (in percent).
+The plug-in assumes that values in percent are part of the document (either visible or as attribute value)
+and a small pie representing each value is to be dynamically inserted. This may be either a static display
+or the pie may be updated upon data changes.
+
+<p>Typical application: Append or prepend to visible percent value:<br>
+This mode assumes by default, that a value (integer number between 0 and 100 inclusive, 
+floating point numbers are supported, but truncated) is the only text content of an HTML element, e.g. a span
+element, and the pie is to be prepended (or appended) to the same element. The pie will usually be auto-sized to fit 
+into the text line. A separator String to be placed between the pie and the number may be configured.
+Defaults are to prepend the pie and use a non-breaking space as separator.
+E.g. say you have HTML code like <code>&lt;p&gt;You have achieved 25 points out of 50 (&lt;span class="pie"&gt;50&lt;/span&gt;%)&lt;/p&gt;</code>,
+then you may insert a pie filled by 50% with <code>$(.pie).progressPie();</code>, resulting in a line like:
+<code>&lt;p&gt;You have achieved 25 points out of 50 (&lt;span class="pie"&gt;&lt;svg&gt;the pie chart&lt;/svg&gt;&amp;nbsp;50&lt;/span&gt;%)&lt;/p&gt;</code>
+
+<p>Usage:
+Select the elements holding the percent number and to insert the pie into by a jQuery selector.
+On the jQuery result set call "progressPie(options)", where options is an optional object
+with configuration options. See <a href="index.html">Home</a> (or README) for a documentation of supported options.
+The plugin is applied to any element in the result set, i.e. if the selector did not found any matching
+element, nothing will happen, while if the selector found several matching elements, the plugin
+will try to insert a corresponding pie into each of the found elements individually.
+
+<p>The progressPie method will <code>return this</code>, enabling chaining of method calls
+on the result set.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object containing individual options (merged with default options)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jquery-progresspiesvg.js.html">jquery-progresspiesvg.js</a>, <a href="jquery-progresspiesvg.js.html#line131">line 131</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    this / result set (for chainable method calls on the result set)
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".setupProgressPie()"><span class="type-signature">(static) </span>setupProgressPie()<span class="signature">(options, replace)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Stores options for the progressPie plug-in. If this plug-in function is called, any succeeding calls to the progressPie plug-in
+without argument will behave the same like when called with the options stored here.
+This is recommended, if the progressPie plug-in gets called repeatedly (to update its graphic due to changed values).
+Then, this setup provides the means to set the options only once and to keep update calls simple instead of
+calling the progressPie repeatedly with the same options argument over and over again.
+<p>The "update" option, if not specified in the options of this call, will default to true (regardless of
+the value defined in $.fn.progressPie.defaults.</p>
+<p>Usage pattern:</p>
+<pre><code>$(selector).setupProgressPie({options}).progressPie();
+update value;
+$(selector).progresssPie(); //update the graphic using the same options.
+</code></pre>
+<p>Repeated calls of setupProgressPie are allowed and will update the options: The options of the subsequent call
+get merged into the existing setup. Example:
+<pre><code>
+$(selector).setupProgressPie({color: "green", strokeWidth: 3});
+...
+$(selector).setupProgressPie({color: "navy"});
+</code></pre>
+<p>In this example the second call will change the color for any following call of <code>progressPie()</code>, but
+will leave the <code>strokeWidth: 3</code> option untouched, i.e. will not reset it to the default.</p>
+<p>Exception of this rule: You may add a second argument to the plugin call of type boolean. If you append
+<code>, true</code>, the options will not be merged into an existing setup, but will completely overwrite
+any existing setup like this was the first call of the setup method at all.</p>
+<p>Suppose, in the example above, we change the second setup call to:</p>
+<pre><code>$(selector.setupProgressPie({color: "navy"}, true);</code></pre>
+<p>Then, this call will not only change the color from green to navy, but also reset the strokeWidth to default.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object containing individual options (merged with default options)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>replace</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">if true, the any previous setup will be completely replaced by this new setup.
+Any property not configured in the options object will be reset to its default value (which may be either be undefined
+or defined by the jQuery.fn.progressPie.defaults object). If false (or falsy, including null or undefined, i.e.
+this also applies if you don't state an actual second argument at all), the passed options will be merged
+into any already existing setup.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="jquery-progresspiesvg.js.html">jquery-progresspiesvg.js</a>, <a href="jquery-progresspiesvg.js.html#line69">line 69</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    this / result set (for chainable method calls on the result set)
+</div>
+
+
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="jQuery.html">jQuery</a></li><li><a href="jQuery.fn.html">fn</a></li><li><a href="jQuery.fn.progressPie.html">progressPie</a></li><li><a href="jQuery.fn.progressPie.contentPlugin.html">contentPlugin</a></li><li><a href="progressPies.html">progressPies</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Oct 04 2018 11:27:43 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
