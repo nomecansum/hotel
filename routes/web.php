@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,10 +32,10 @@ Route::post('/id/{puesto}','HomeController@ident_puesto');
 Route::get('/form/{puesto}/{pin}','HomeController@getpuesto');
 
 //Formulario de solicitud para un puesto
-Route::get('/solicitud/{puesto}/{pin}','incidenciasController@solicitud_cliente');
+Route::get('/solicitud/{puesto}/{pin}','IncidenciasController@solicitud_cliente');
 
 //Formulario de incidencia para un puesto
-Route::get('/incidencia/{puesto}/{pin}','incidenciasController@incidencia_cliente');
+Route::get('/incidencia/{puesto}/{pin}','IncidenciasController@incidencia_cliente');
 Route::post('/incidencia/save_clientes','IncidenciasController@save_clientes');
 
 //Listado de incidencias para clientes
