@@ -82,17 +82,15 @@ class HomeController extends Controller
             ->join('clientes','puestos.id_cliente','clientes.id_cliente')
             ->where('token',$puesto)
             ->first();
-
         if(isset($puesto)){
             //Buscamos una reserva para hoy de este puesto  y confirmamos el pin
             $reserva=DB::table('reservas')
                 ->where('id_puesto',$puesto->id_puesto)
                 ->where('fec_reserva','<=',Carbon::now()->format('Y-m-d'))
                 ->where('fec_fin_reserva','>=',Carbon::now()->format('Y-m-d'))
-                ->where('pin',$r->pin)
+                ->where('pin',strtoupper($r->pin))
                 ->first();
-
-            if(isset($reserva) && $reserva->pin==$r->pin){
+            if(isset($reserva) && strtoupper($reserva->pin)==strtoupper($r->pin)){
                 return redirect('/form/'.$puesto->token.'/'.$r->pin);
             } else {
                 return back()->withInput()
@@ -120,7 +118,7 @@ class HomeController extends Controller
             ->where('id_puesto',$p->id_puesto)
             ->where('fec_reserva','<=',Carbon::now()->format('Y-m-d'))
             ->where('fec_fin_reserva','>=',Carbon::now()->format('Y-m-d'))
-            ->where('pin',$pin)
+            ->where('pin',strtoupper($pin))
             ->first();
         if(!isset($mireserva)){
             savebitacora('Puesto ['.$puesto.'] Error al verificar PIN. '.url()->full(),"Scan","getpuesto","ERROR");

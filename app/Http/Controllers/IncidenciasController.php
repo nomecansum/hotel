@@ -1777,7 +1777,7 @@ class IncidenciasController extends Controller
             ->where('id_puesto',$puesto->id_puesto)
             ->where('fec_reserva','<=',Carbon::now()->format('Y-m-d'))
             ->where('fec_fin_reserva','>=',Carbon::now()->format('Y-m-d'))
-            ->where('pin',$pin)
+            ->where('pin',strtoupper($pin))
             ->first();
         if(!isset($mireserva)){
             savebitacora('Puesto ['.$puesto->id_puesto.'] Error al verificar PIN. '.url()->full(),"Scan","getpuesto","ERROR");
@@ -1819,7 +1819,7 @@ class IncidenciasController extends Controller
             ->where('id_puesto',$puesto->id_puesto)
             ->where('fec_reserva','<=',Carbon::now()->format('Y-m-d'))
             ->where('fec_fin_reserva','>=',Carbon::now()->format('Y-m-d'))
-            ->where('pin',$pin)
+            ->where('pin',strtoupper($pin))
             ->first();
         if(!isset($mireserva)){
             savebitacora('Puesto ['.$puesto->id_puesto.'] Error al verificar PIN. '.url()->full(),"Scan","getpuesto","ERROR");
@@ -1939,7 +1939,7 @@ class IncidenciasController extends Controller
             ->where('id_puesto',$puesto->id_puesto)
             ->where('fec_reserva','<=',Carbon::now()->format('Y-m-d'))
             ->where('fec_fin_reserva','>=',Carbon::now()->format('Y-m-d'))
-            ->where('pin',$pin)
+            ->where('pin',strtoupper($pin))
             ->first();
         if(!isset($mireserva)){
             savebitacora('Puesto ['.$puesto->id_puesto.'] Error al verificar PIN. '.url()->full(),"Scan","getpuesto","ERROR");
@@ -1979,7 +1979,7 @@ class IncidenciasController extends Controller
             ->where('id_puesto',$puesto->id_puesto)
             ->where('fec_reserva','<=',Carbon::now()->format('Y-m-d'))
             ->where('fec_fin_reserva','>=',Carbon::now()->format('Y-m-d'))
-            ->where('pin',$pin)
+            ->where('pin',strtoupper($pin))
             ->first();
         if(!isset($mireserva)){
             savebitacora('Puesto ['.$puesto->id_puesto.'] Error al verificar PIN. '.url()->full(),"Scan","getpuesto","ERROR");

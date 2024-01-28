@@ -61,7 +61,7 @@ class PuestosController extends Controller
             ->orderby('edificios.id_edificio')
             ->orderby('plantas.id_planta')
             ->orderby('puestos.cod_puesto')
-            ->where('puestos.id_puesto','>',1)
+            ->where('puestos.id_puesto','>',0)
             ->paginate(50);
 
 
