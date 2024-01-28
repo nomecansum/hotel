@@ -103,7 +103,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12 text-center">
-                        <button class="btn btn-lg btn-primary text-bold btn_solicitud" data-id="{{$puesto->token}}" style="width: 250px"><i class="fa-duotone fa-square-question"></i> Relizar una solicitud</button>
+                        <button class="btn btn-lg btn-primary text-bold btn_solicitud" data-id="{{$puesto->token}}" style="width: 250px"><i class="fa-duotone fa-square-question"></i> Realizar una solicitud</button>
                     </div>
                 </div>
                 <div class="row mt-3">
