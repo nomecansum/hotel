@@ -92,11 +92,11 @@
 
     
            
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-12 text-center mt-3">
             <a class="btn btn-lg btn-primary fs-2 rounded btn_otravez" href="{{ url('/scan_usuario/') }} "><i class="fad fa-qrcode fa-3x"></i> Escanear otra vez</a>
         </div>
-    </div>
+    </div> --}}
 
 
     <div class="row mt-3" id="boton_home" style="display:none">
