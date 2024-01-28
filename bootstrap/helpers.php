@@ -1520,45 +1520,36 @@ function enviar_mail_reserva($id_reserva,$mca_ical,$sender_name=null){
     $det_reserva=reservas::find($id_reserva);
     $det_puesto=puestos::find($det_reserva->id_puesto);
     $salas=salas::find($det_puesto->id_sala);
-    $user=users::find($det_reserva->id_usuario);
+    $cliente=clientes::find($det_reserva->id_cliente);
     if(isset($salas)){
         $des_evento="Reserva de sala de reunion [".$det_puesto->cod_puesto."] ".$det_puesto->des_puesto;
         $tipo="la sala de reunion";
     } else {
-        $des_evento="Reserva de puesto [".$det_puesto->cod_puesto."] ".$det_puesto->des_puesto;
+        $des_evento="Reserva de espacio [".$det_puesto->cod_puesto."] ".$det_puesto->des_puesto;
         $tipo="el puesto";
     }
     // $body="Tiene reservado ".$tipo. " [".$det_puesto->cod_puesto."] ".$det_puesto->des_puesto." con el siguiente identificador de reserva: ".$id_reserva;
     // if($id_reserva!=null){
     //     $body.=".\n\n Su reserva anterior ha sido anulada";
     // }
-    $subject="Detalles de su reserva con Spotdesking";
-    $str_notificacion=$sender_name??$user->name.' ha creado una Reserva  del puesto ['.$det_puesto->cod_puesto.'] '.$det_puesto->des_puesto.' para usted en el periodo  '.beauty_fecha($det_reserva->fec_reserva).' - '.beauty_fecha($det_reserva->fec_fin_reserva).' con identificador #'.$id_reserva;
-
-    if(isset($mca_ical) && $mca_ical=='S'){
-        $cal=Calendar::create('Reserva de puestos Spotdesking');
-       
-        $evento=Event::create()
-            ->name($des_evento)
-            ->description($str_notificacion)
-            ->uniqueIdentifier($id_reserva)
-            ->organizer($user->email, $user->name)
-            ->createdAt(Carbon::now())
-            ->startsAt(Carbon::parse($det_reserva->fec_reserva))
-            ->endsAt(Carbon::parse($det_reserva->fec_fin_reserva));
-        $cal->event($evento);
-        
-        $cal=$cal->get();
-        $nombre_ical="reserva_".Auth::user()->id."_".Carbon::now()->format('Ymdhi').".ics";
-        $attach=Storage::disk('local')->put("ical/".$nombre_ical,$cal);
-        if($attach){
-            $attach=storage_path('app/ical/'.$nombre_ical);
-        }
-        //$attach=['nombre'=>"reserva_".Auth::user()->id."_".Carbon::now()->format('Ymdhi').".ics","tipo"=>'text/calendar','dato'=>$cal];
-    } else {
-        $attach=null;
+    $subject="Detalles de su reserva con ".$cliente->nom_cliente;
+    $str_notificacion='Bienvenido a nuestro hotel, se ha confirmado la reserva de su espacio  '.$det_puesto->des_puesto.' para usted en el periodo  '.beauty_fecha($det_reserva->fec_reserva).' - '.beauty_fecha($det_reserva->fec_fin_reserva).' con identificador #'.$id_reserva.'. Su pìn de acceso para cualquier solicitud o incidencia que surja es <b style="font-size: 20px">'.$det_reserva->pin.'</b>';
+    if(isset($det_reserva->email)){
+        $user=new \StdClass();
+        $user->email=$det_reserva->email;
+        $user->name=$det_reserva->nombre;
+        Mail::send('emails.mail_reserva', ['body'=>$str_notificacion,'cliente'=>$cliente,'id'=>$id_reserva,'user'=>$user], function ($m) use ($user,$subject,) {
+            if(config('app.env')=='local' || config('app.env')=='qa'){//Para que en desarrollo solo me mande los mail a mi
+                Log::debug('Capturado email para '.$user->email.' ('.$user->name.')');
+                $m->to('nomecansum@gmail.com', $user->name)->subject(strip_tags($subject));
+            } else {
+                $m->to($user->email, $user->name)->subject(strip_tags($subject));
+            }
+            $m->from(config('mail.from.address'),config('mail.from.name'));
+        });
     }
-    notificar_usuario($user,$des_evento,'emails.mail_reserva',$str_notificacion,metodos_notificacion_usuario($user->id),2,$attach,$det_reserva->id_reserva);
+    //notificar_usuario($user,$des_evento,'emails.mail_reserva',$str_notificacion,metodos_notificacion_usuario($user->id),2,$attach,$det_reserva->id_reserva);
+    
 }
 
 //Funcion para aplicar los colores de la pagina
