@@ -40,7 +40,7 @@
     }
 
     //Funciones para mostrar los mensajes Toast
-    function toast_ok(titulo,mensaje){
+    function toast_ok(titulo,mensaje,timeout=2000){
         if (titulo==undefined){
             titulo="{{ env('APP_NAME') }}";
         }
@@ -48,13 +48,13 @@
             title: titulo,
             message: mensaje,
             status: TOAST_STATUS.SUCCESS,
-            timeout: 2000
+            timeout: timeout
         }
         Toast.setTheme(TOAST_THEME.LIGHT);
         Toast.setPlacement(TOAST_PLACEMENT.TOP_CENTER);
         Toast.create(toast);
     }
-    function toast_error(titulo,mensaje){
+    function toast_error(titulo,mensaje,timeout=5000){
         if (titulo==undefined){
             titulo="ERROR";
         }
@@ -62,13 +62,13 @@
             title: titulo,
             message: mensaje,
             status: TOAST_STATUS.DANGER,
-            timeout: 5000
+            timeout: timeout
         }
         Toast.setTheme(TOAST_THEME.LIGHT);
         Toast.setPlacement(TOAST_PLACEMENT.TOP_CENTER);
         Toast.create(toast);
     }
-    function toast_warning(titulo,mensaje){
+    function toast_warning(titulo,mensaje,timeout=5000){
         if (titulo==undefined){
             titulo="{{ env('APP_NAME') }}";
         }
@@ -76,13 +76,13 @@
             title: titulo,
             message: mensaje,
             status: TOAST_STATUS.WARNING,
-            timeout: 5000
+            timeout: timeout
         }
         Toast.setTheme(TOAST_THEME.LIGHT);
         Toast.setPlacement(TOAST_PLACEMENT.TOP_CENTER);
         Toast.create(toast);
     }
-    function toast_info(titulo,mensaje){
+    function toast_info(titulo,mensaje,timeout=5000){
         if (titulo==undefined){
             titulo="{{ env('APP_NAME') }}";
         }
@@ -90,7 +90,7 @@
             title: titulo,
             message: mensaje,
             status: TOAST_STATUS.INFO,
-            timeout: 5000
+            timeout: timeout
         }
         Toast.setTheme(TOAST_THEME.LIGHT);
         Toast.setPlacement(TOAST_PLACEMENT.TOP_CENTER);
@@ -234,12 +234,18 @@
             data: data,
         })
         .done(function(data) {
+            //console.log(data);
+            if(data.timeout==undefined){
+                data.timeout=5;
+            }
+            data.timeout=data.timeout*1000;
             if(data.error){
-                toast_error(data.title,data.error);
+                
+                toast_error(data.title,data.error,data.timeout);
             } else if(data.alert){
-                toast_warning(data.title,data.alert);
+                toast_warning(data.title,data.alert,data.timeout);
             } else{
-                toast_ok(data.title,data.message);
+                toast_ok(data.title,data.message,data.timeout);
             }
             $('.modal').modal('hide');
            

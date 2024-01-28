@@ -272,9 +272,9 @@
             } else{
                 
                 animateCSS('#editor','fadeOut',$('#editor').html(''));
-                toast_ok(data.title,data.mensaje);
+                toast_ok(data.title,data.mensaje,30000);
                 loadMonth();
-                animateCSS('#TD'+data.fecha,'flip');
+                //animateCSS('#TD'+data.fecha,'flip');
                 
             }
             

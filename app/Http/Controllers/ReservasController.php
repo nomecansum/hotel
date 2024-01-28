@@ -650,10 +650,11 @@ class ReservasController extends Controller
 
         return [
             'title' => "Reservas",
-            'mensaje' => 'Puesto '.$puesto->cod_puesto.' reservado. Identificadores de reserva: '.$res->id_reserva,
+            'mensaje' => 'Puesto '.$puesto->cod_puesto.' reservado. Identificadores de reserva: '.$res->id_reserva.' <br> PIN para acceso '.$pin.(isset($r->email)?'<br>Se ha enviado un email con los datos de la reserva a '.$r->email:'<br>No se han indicado datos de email del cliente'),
             'fecha' => '['.$fec_desde->format('d/m/Y H:i').' - '.$fec_hasta->format('d/m/Y H:i').']',
             'fec_ver' => $fec_desde->format('Y-m-d'),
             //'url' => url('puestos')
+            'timeout'=>120
         ];
     
     }
