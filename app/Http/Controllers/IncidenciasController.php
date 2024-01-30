@@ -679,7 +679,7 @@ class IncidenciasController extends Controller
             'procedencia'=>'nullable',
             'url_detalle_incidencia'=>'nullable',
             'origen'=>'nullable',
-            'pin'=>'required',
+            'pin'=>'nullable',
         ];
         $data = $request->validate($rules);
         return $data;

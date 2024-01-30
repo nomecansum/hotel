@@ -38,17 +38,7 @@
                     </select>
                     
                 </div>   
-                {{-- Si es una solicitud, pondremos el campo de proyecto y el de presupuesto --}}
-                @if($puesto->id_puesto==0)
-                <div class="form-group col-md-2 {{ $errors->has('id_tipo_incidencia') ? 'has-error' : '' }}">
-                    <label for="val_presupuesto" class="control-label">Presupuesto</label>
-                    <input class="form-control"  name="val_presupuesto" type="text" id="val_presupuesto"  maxlength="200" >
-                </div>
-                <div class="form-group col-md-2 {{ $errors->has('id_tipo_incidencia') ? 'has-error' : '' }}">
-                    <label for="val_proyecto" class="control-label">Proyecto</label>
-                    <input class="form-control"  name="val_proyecto" type="text" id="val_proyecto"  maxlength="200" >
-                </div>
-                @endif
+
                 
             </div>
             @if((isset($config->val_layout_incidencias) && ($config->val_layout_incidencias=='D' || $config->val_layout_incidencias=='A')) || (!isset($config->val_layout_incidencias)))
