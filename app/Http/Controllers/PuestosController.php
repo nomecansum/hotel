@@ -699,6 +699,7 @@ class PuestosController extends Controller
                     $q->wherein('puestos.id_puesto',$puestos_usuario);
                 }
             })
+            ->where('puestos.id_puesto','<>',0)
             ->orderby('edificios.des_edificio')
             ->orderby('plantas.num_orden')
             ->orderby('plantas.des_planta')
@@ -782,6 +783,7 @@ class PuestosController extends Controller
             ->orderby('plantas.num_orden')
             ->orderby('plantas.des_planta')
             ->orderby('puestos.des_puesto')
+            ->where('puestos.id_puesto','<>',0)
             ->get();
 
         $edificios=DB::table('edificios')

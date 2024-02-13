@@ -58,7 +58,7 @@
                                     <td class="text-end">
                                         <div class="pull-right" style="bottom: 0px">
                                             <div class="btn-group btn-group pull-right" role="group">
-                                                <a href="#" class="btn btn-info btn-xs btn_edit  add-tooltip" onclick="editar_reserva({{ $res->id_reserva }})" title="Modificar reserva" data-id="{{ $res->id_reserva }}" data-fecha="{{ Carbon\Carbon::parse($res->fec_reserva)->format('d/m/Y') }}" data-des_puesto="{{ $res->cod_puesto }}"><i class="fad fa-pencil-alt"></i> Editar</a>
+                                                <a href="javascript:void(0)" class="btn btn-info btn-xs btn_edit  add-tooltip" onclick="editar_reserva({{ $res->id_reserva }})" title="Modificar reserva" data-id="{{ $res->id_reserva }}" data-fecha="{{ Carbon\Carbon::parse($res->fec_reserva)->format('d/m/Y') }}" data-des_puesto="{{ $res->cod_puesto }}"><i class="fad fa-pencil-alt"></i> Editar</a>
                                                 {{-- <a href="#planta{{ $res->id_planta }}" class="btn btn-secondary btn-xs btn_ver  add-tooltip" title="Ver puesto en plano/mapa" data-id="{{ $res->id_reserva }}" data-fecha="{{ Carbon\Carbon::parse($res->fec_reserva)->format('d/m/Y') }}" data-puesto="{{ $res->id_puesto }}"><i class="fad fa-search-location"></i> Ver</a> --}}
                                                 <a href="#" class="btn btn-danger btn-xs btn_del  add-tooltip" onclick="borrar_reserva({{ $res->id_reserva }},$(this))" title="Cancelar reserva" data-id="{{ $res->id_reserva }}" data-fecha="{{ Carbon\Carbon::parse($res->fec_reserva)->format('d/m/Y') }}" data-des_puesto="{{ $res->cod_puesto }}"><i class="fad fa-trash-alt"></i> Cancelar</a>
                                             </div>
@@ -433,6 +433,9 @@
         $('#editorCAM').load("{{ url('/reservas/edit/') }}/"+id, function(){
             $('#id_tipo_puesto').trigger('change');
         });
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#editorCAM").offset().top
+        }, 2000);
     }
     $('.btn_edit').click(function(){
        
