@@ -430,7 +430,7 @@
         
     })
     function editar_reserva(id){
-        $('#editorCAM').load("{{ url('/reservas/edit/') }}/"+id, function(){
+        $('#editorCAM').load("{{ url('/reservas/edit/') }}/"+id+"/"+"{{ $f1->format('Y-m-d') }}", function(){
             $('#id_tipo_puesto').trigger('change');
         });
         $([document.documentElement, document.body]).animate({

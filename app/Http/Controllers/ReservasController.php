@@ -168,10 +168,10 @@ class ReservasController extends Controller
         $festivos_usuario=$this->festivos_usuario(Auth::user()->id);
         $perfil_usuario=niveles_acceso::find(Auth::user()->cod_nivel);
 
-        return view('reservas.edit',compact('reserva','f1','f2','tipos','misreservas','plantas_usuario','festivos_usuario','perfil_usuario'));
+        return view('reservas.edit',compact('reserva','f1','f2','tipos','misreservas','plantas_usuario','festivos_usuario','perfil_usuario','fecha'));
     }
 
-    public function edit($id){
+    public function edit($id,$fecha=null){
         
         $reserva=DB::table('reservas')
             ->join('puestos','puestos.id_puesto','reservas.id_puesto')
@@ -209,16 +209,14 @@ class ReservasController extends Controller
             ->join('puestos','puestos.id_puesto','reservas.id_puesto')
             ->join('puestos_tipos','puestos.id_tipo_puesto','puestos_tipos.id_tipo_puesto')
             ->join('users','reservas.id_usuario','users.id')
-            ->where(function($q) use($f1,$f2){
-                $q->where(function($q) use($f1,$f2){
+            ->where(function($q) use($fecha){
+                $q->where(function($q) use($fecha){
                     $q->wherenull('fec_fin_reserva');
-                    $q->where('fec_reserva',$f1);
+                    $q->where('fec_reserva',$fecha);
                 });
-                $q->orwhere(function($q) use($f1,$f2){
-                    $q->whereraw("'".$f1."' between fec_reserva AND fec_fin_reserva");
-                    $q->orwhereraw("'".$f2."' between fec_reserva AND fec_fin_reserva");
-                    $q->orwherebetween('fec_reserva',[$f1,$f2]);
-                    $q->orwherebetween('fec_fin_reserva',[$f1,$f2]);
+                $q->orwhere(function($q) use($fecha){
+                    $q->whereraw("'".$fecha."' between fec_reserva AND fec_fin_reserva");
+                    $q->orwhereraw("'".$fecha."' between fec_reserva AND fec_fin_reserva");
                 });
             })
             ->where('mca_anulada','N')

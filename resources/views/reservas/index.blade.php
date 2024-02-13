@@ -21,7 +21,7 @@
 <div class="row botones_accion">
     <div class="col-md-3">
         <div class="input-group float-right" id="div_fechas">
-            <input type="text" class="form-control pull-left ml-1" id="fecha_ver" name="fecha_ver" value="{{ Carbon\Carbon::now()->format('d/m/Y') }}">
+            <input type="text" class="form-control pull-left ml-1" id="fecha_ver" name="fecha_ver" value="{{ isset($fecha)?Carbon\Carbon::parse($fecha)->format('d/m/Y'):Carbon\Carbon::now()->format('d/m/Y') }}">
             <span class="btn input-group-text btn-secondary btn_fecha"  style="height: 40px"><i class="fas fa-calendar mt-1"></i></span>
         </div>
     </div>
@@ -149,7 +149,14 @@
 
         picker.onSelect((date, formatedDate) => {
             lafecha=moment(formatedDate,"DD/MM/YYYY").format('YYYY-MM-DD');
-            $('#detalles_reserva').load("/reservas/dia/"+lafecha);
+            // fechas=formatedDate +' - '+formatedDate;
+            // $.post('{{url('/reservas/create')}}', {_token: '{{csrf_token()}}',fechas: fechas,edificio:$('#id_edificio').val(),tipo: $(this).data('href'), hora_inicio: $('#hora_inicio').val(),hora_fin: $('#hora_fin').val(),id_planta:$('#id_planta').val(),tipo: 'comprobar'}, function(data, textStatus, xhr) {
+            //         $('#detalles_reserva').html(data);
+            //         recolocar_puestos();
+            //         console.log('modo.click');
+            //     });
+
+            $('#editorCAM').load("/reservas/create/"+lafecha);
         });
 
 

@@ -191,6 +191,7 @@ $total_puestos=DB::table('puestos')->where('id_cliente',Auth::user()->id_cliente
 
 	$('.td_calendar').click(function(){
 		spshow('spin');
+		$('#fecha_ver').val(moment($(this).data('fecha'),"YYYY-MM-DD").format('DD/MM/YYYY'));
 		if($(this).data('past')==0){
 			$('#editorCAM').load("{{ url('/reservas/create/') }}/"+$(this).data('fecha'), function(){
 				animateCSS('#editorCAM','bounceInRight');
