@@ -1243,6 +1243,11 @@ class ReportsController extends Controller
                 }
             })
             ->where(function($q) use($r){
+                if ($r->or) {
+                    $q->where('incidencias.origen',$r->or);
+                }
+            })
+            ->where(function($q) use($r){
                 if ($r->tags) {
                     if($r->andor){//Busqueda con AND
                         $puestos_tags=DB::table('tags_puestos')

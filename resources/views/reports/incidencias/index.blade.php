@@ -71,6 +71,15 @@
 							</select>
 						</div>
 					</div>
+					<div class="col-md-3" style="padding-left: 15px">
+						<div class="form-group">
+							<label>Origen</label>
+							<select class="form-control" id="or" name="or">
+									<option value="S" >Solicitudes</option>
+									<option value="I" >Incidencias</option>
+							</select>
+						</div>
+					</div>
 				</div>
 				
 				@include('resources.combos_opciones_informes',[$show=['output'=>1,'orientation'=>1]])
