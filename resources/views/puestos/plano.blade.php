@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    <h1 class="page-header text-overflow pad-no">Mapa de puestos (plano)</h1>
+    <h1 class="page-header text-overflow pad-no">Mapa de espacios (plano)</h1>
 @endsection
 
 @section('styles')

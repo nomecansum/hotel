@@ -19,7 +19,7 @@
     <div class="card">
         <div class="card-header toolbar">
             <div class="toolbar-start">
-                <h5 class="m-0">Modificar puesto {{ $puesto->id_puesto }}</h5>
+                <h5 class="m-0">Modificar espacio {{ $puesto->id_puesto }}</h5>
             </div>
             <div class="toolbar-end">
                 <button type="button" class="btn-close btn-close-card">

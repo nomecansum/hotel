@@ -81,7 +81,7 @@
                     </a>
                     <!-- Dashboard submenu list -->
                     <ul class="mininav-content nav collapse">
-                        @if(checkPermissions(['Reservas puestos'],['R']))<li class="reservas_puestos nav-item"><a href="/reservas" class="text-nowrap nav-link"><i class="fad fa-door-open"></i> Espacios</a></li> @endif
+                        @if(checkPermissions(['Reservas puestos'],['R']))<li class="reservas_puestos nav-item"><a href="/reservas" class="text-nowrap nav-link"><i class="fad fa-door-open"></i> Habitaciones</a></li> @endif
                         @if(checkPermissions(['Reservas salas'],['R']) && session('CL')['mca_salas']=='S')<li class="reservas_salas nav-item"><a href="/salas/reservas" class="text-nowrap nav-link"><i class="fad fa-users-class"></i> Salas</a></li> @endif
                     </ul>
                     <!-- END : Dashboard submenu list -->
@@ -184,9 +184,9 @@
                                 @if(checkPermissions(['Clientes'],['R']))<li class=" text-nowrap ml-2 nav-item"><a href="/clientes" class="nav-link clientes"><i class="fa-light fa-user-tie"></i> Empresas</a></li> @endif
                                 @if(checkPermissions(['Edificios'],['R']))<li class=" text-nowrap ml-2 nav-item"><a href="/edificios" class="nav-link edificios"><i class="fa-light fa-building"></i> Edificios</a></li> @endif
                                 @if(checkPermissions(['Plantas'],['R']))<li class=" text-nowrap ml-2 nav-item"><a href="/plantas" class="nav-link plantas"> <i class="fa-light fa-layer-group"></i> Plantas</a></li> @endif
-                                @if(checkPermissions(['Puestos'],['R']))<li class=" text-nowrap ml-2 nav-item"><a href="/puestos" class="nav-link puestos"> <i class="fa-light fa-desktop-alt"></i> Puestos</a></li> @endif
+                                @if(checkPermissions(['Puestos'],['R']))<li class=" text-nowrap ml-2 nav-item"><a href="/puestos" class="nav-link puestos"> <i class="fa-light fa-desktop-alt"></i> Espacios</a></li> @endif
                                 
-                                @if(checkPermissions(['Tipos de puesto'],['R']))<li class="  text-nowrap ml-2 nav-item" ><a href="/puestos/tipos" class="nav-link puestostipos"><i class="fa-light fa-desktop-alt"></i> Tipos de puesto</a></li> @endif
+                                @if(checkPermissions(['Tipos de puesto'],['R']))<li class="  text-nowrap ml-2 nav-item" ><a href="/puestos/tipos" class="nav-link puestostipos"><i class="fa-light fa-desktop-alt"></i> Tipos de espacio</a></li> @endif
                                 @if(checkPermissions(['Tags'],['R']))<li class="  text-nowrap ml-2 nav-item"><a href="/tags" class="nav-link"> <i class="fa-light fa-tags tags"></i> Tags</a></li> @endif
                                 @if(checkPermissions(['Encuestas'],['R']))<li class=" text-nowrap ml-2 nav-item"><a href="/encuestas" class="nav-link"><i class="fa-light fa-poll-h encuestas"></i> Encuestas</a></li> @endif
                                 @if(checkPermissions(['Bloqueo de puestos'],['R']))<li class=" text-nowrap ml-2 nav-item"><a href="/bloqueo" class="nav-link"><i class="fa-light fa-lock"></i> Bloqueo de puestos</a></li> @endif

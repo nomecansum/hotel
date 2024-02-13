@@ -37,7 +37,7 @@
                                     <th>ID</th>
                                     <th>Periodo</th>
                                     <th>Tipo</th>
-                                    <th class="text-center">Espacio</th>
+                                    <th class="text-center">Habitacion</th>
                                     <th class="text-center">Nombre</th>
                                     <th class="text-center">PIN</th>
                                     <th></th>
@@ -134,7 +134,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="id_usuario">Tipo de espacio</label>
+                        <label for="id_usuario">Tipo</label>
                         <select name="id_tipo_puesto" id="id_tipo_puesto" class="form-control">
                             <option value="0">Cualquiera</option>
                             @foreach($tipos as $t)

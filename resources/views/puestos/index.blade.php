@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    <h1 class="page-header text-overflow pad-no">Gestión de puestos</h1>
+    <h1 class="page-header text-overflow pad-no">Gestión de espacios</h1>
 @endsection
 
 @section('styles')
@@ -28,7 +28,7 @@
         <li class="breadcrumb-item"><a href="{{url('/')}}" class="link-light">Home </a> </li>
         <li class="breadcrumb-item">parametrizacion</li>
 	    <li class="breadcrumb-item">espacios</li>
-        <li class="breadcrumb-item active">puestos</li>
+        <li class="breadcrumb-item active">espacios</li>
         {{--  <li class="breadcrumb-item"><a href="{{url('/users')}}">Usuarios</a></li>
         <li class="breadcrumb-item active">Editar usuario {{ !empty($users->name) ? $users->name : '' }}</li>  --}}
     </ol>
@@ -67,7 +67,7 @@
                         <li><a href="#" class="btn_export_qr dropdown-item"><i class="fad fa-file-export"></i></i> Exportar QR</a></li>
                         @if(checkPermissions(['Rondas de limpieza'],['C']) && session('CL')['mca_limpieza']=='S')<li><a href="#" class="btn_asignar dropdown-item" data-tipo="L" ><i class="fad fa-broom"></i >Ronda de limpieza</a></li>@endif
                         @if(checkPermissions(['Rondas de mantenimiento'],['C']))<li><a href="#" class="btn_asignar dropdown-item" data-tipo="M"><i class="fad fa-tools"></i> Ronda de mantenimiento</a></li>@endif
-                        @if(checkPermissions(['Puestos'],['D']))<li><a href="#" class="btn_borrar_puestos btn_toggle_dropdown dropdown-item"  data-tipo="M"><i class="fad fa-trash"></i></i> Borrar puestos</a> </li>@endif
+                        @if(checkPermissions(['Puestos'],['D']))<li><a href="#" class="btn_borrar_puestos btn_toggle_dropdown dropdown-item"  data-tipo="M"><i class="fad fa-trash"></i></i> Borrar espacios</a> </li>@endif
                     </ul>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                     </button>
                 </div>    
                 <div class="modal-body">
-                    ¿Borrar <span id="cuenta_puestos_borrar"></span> puestos?<br>
+                    ¿Borrar <span id="cuenta_puestos_borrar"></span> espacios?<br>
                     Esta accion no puede deshacerse
                 </div>
 

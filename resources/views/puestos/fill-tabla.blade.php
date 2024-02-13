@@ -2,12 +2,12 @@
 <div class="row">
     <div class="card" style="width: 100%">
         <div class="card-header">
-            <h3 class="card-title">Puestos</h3>
+            <h3 class="card-title">Espacios</h3>
         </div>
         <div class="card-body w-100" id="main_panel">
             <div class="table-responsive w-100" style="position: relative">
                 <form action="{{url('/puestos/print_qr')}}" method="POST"  id="frmpuestos" enctype='multipart/form-data'>
-                    <h5>{{ $puestos->count() }} Puestos encontrados</h5>
+                    <h5>{{ $puestos->count() }} Espacios encontrados</h5>
                     @csrf
                         {{-- <div class="td"><div class="loader"></div></div> --}}
                      {{-- <table class="table table-striped table-hover table-vcenter" id="tablapuestos"  style="width: 98%" data-toggle="table" data-mobile-responsive="true"  data-pagination="true" data-search="true"> --}}

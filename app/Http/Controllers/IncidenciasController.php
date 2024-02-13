@@ -2019,4 +2019,6 @@ class IncidenciasController extends Controller
         return view('incidencias.fill-detalle-incidencia_cliente',compact('incidencia','acciones'));
 
     }
+
+
 }

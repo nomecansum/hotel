@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    <h1 class="page-header text-overflow pad-no">Mapa de puestos (lista)</h1>
+    <h1 class="page-header text-overflow pad-no">Mapa de espacios (lista)</h1>
 @endsection
 
 @section('styles')
@@ -14,8 +14,8 @@
 @section('breadcrumb')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('/')}}" class="link-light">Home </a> </li>
-        <li class="breadcrumb-item"><a href="{{url('/puestos')}}">Puestos</a></li>
-        <li class="breadcrumb-item active">Mapa de puestos</li>
+        <li class="breadcrumb-item"><a href="{{url('/puestos')}}">Espacios</a></li>
+        <li class="breadcrumb-item active">Mapa de espacios</li>
     </ol>
 @endsection
 

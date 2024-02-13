@@ -87,7 +87,7 @@
     lista_ficheros=[];	
     $('#adjuntos').val('');
     var myDropzone = new Dropzone("#dZUpload" , {
-        url: '{{ url('/incidencias/upload_imagen/') }}',
+        url: '{{ url('/incidencias/upload_imagen_cliente/') }}',
         autoProcessQueue: true,
         uploadMultiple: true,
         parallelUploads: 1,

@@ -44,6 +44,9 @@ Route::get('/incidencia/listado_clientes/{puesto}/{pin}','IncidenciasController@
 //Detalle de una incidencia para clientes
 Route::get('/incidencia/det/{puesto}/{pin}/{id}','IncidenciasController@detalle_clientes');
 
+//Subir_adjuntos_clientes
+Route::post('/upload_imagen_cliente','IncidenciasController@subir_adjuntos');
+
 Route::get('/puesto/estado/{puesto}/{estado}','HomeController@estado_puesto');
 Route::post('/puesto/estado/{puesto}/{estado}','HomeController@estado_puesto');
 

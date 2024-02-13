@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    <h1 class="page-header text-overflow pad-no">Reserva de espacios</h1>
+    <h1 class="page-header text-overflow pad-no">Reservas</h1>
 @endsection
 
 @section('styles')
@@ -13,7 +13,7 @@
 @section('breadcrumb')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('/')}}" class="link-light">Home </a> </li>
-        <li class="breadcrumb-item active">Reserva de espacios</li>
+        <li class="breadcrumb-item active">Reservas</li>
     </ol>
 @endsection
 
