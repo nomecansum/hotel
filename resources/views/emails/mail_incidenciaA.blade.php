@@ -24,7 +24,7 @@ $usuario=users::find($accion->id_usuario);
 @endsection
 
 @section('saludo')
-    Hola {{$usuario->name}}!
+    Hola!
 @endsection
 
 @section('titulo')

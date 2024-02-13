@@ -72,7 +72,7 @@ class Handler extends ExceptionHandler
 		{
 			try {
 	    		//mandamos un email con datos
-	    		enviar_email_error($request, config('mail.from.address'), config('mail.error'), config('mail.error'), "Error en QrClean PROD - catch", "emails.mail_error_catch",  $exception); //error
+	    		enviar_email_error($request, config('mail.from.address'), config('mail.error'), config('mail.error'), "Error en ".env('APP_NAME')." | ".env('APP_ENV')." - catch", "emails.mail_error_catch",  $exception); //error
     
 	    	}
 	    	catch(\Exception $e){
