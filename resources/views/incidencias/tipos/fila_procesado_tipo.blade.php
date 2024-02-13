@@ -26,6 +26,7 @@
                         <div class="form-group col-md-12">
                             <label for="id_estado" class="control-label" style="text-align: left">Cuando cambie al estado:</label>
                             <select class="form-control" required id="id_estado" name="id_estado">
+                                <option value="-1" {{ $estado->id_estado==-1?'selected':'' }}> Cualquiera</option>  
                             @foreach ($estados as $estado)
                                 <option value="{{ $estado->id_estado }}" {{ $estado->id_estado==$tipo->id_estado?'selected':'' }}>
                                     {{ $estado->des_estado }}
