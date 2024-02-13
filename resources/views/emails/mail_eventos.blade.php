@@ -13,7 +13,7 @@ use App\Models\users;
 @endsection
 
 @section('saludo')
-    Hola {{$user->name}}!
+    Hola!
 @endsection
 
 @section('cuerpo')

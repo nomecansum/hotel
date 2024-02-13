@@ -14,7 +14,7 @@ if (isset($accion)){
 } else {
     $nombre_usuario="Se ";
 }
-$entidad=$inc->id_puesto==0?'solicitud':'incidencia';
+$entidad=$inc->origen=='S'?'solicitud':'incidencia';
 $puesto=DB::table('puestos')
 ->join('edificios','puestos.id_edificio','edificios.id_edificio')
 ->join('plantas','puestos.id_planta','plantas.id_planta')
@@ -31,7 +31,7 @@ $puesto=DB::table('puestos')
 @endsection
 
 @section('saludo')
-    Hola {{$usuario->name??''}}!
+    Hola!
 @endsection
 
 @section('titulo')

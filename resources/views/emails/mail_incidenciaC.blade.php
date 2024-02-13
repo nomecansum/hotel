@@ -6,7 +6,7 @@ use App\Models\users;
 
 //$inc=incidencias::find(3);
 $tipo=incidencias_tipos::find($inc->id_tipo_incidencia);
-$entidad=$inc->id_puesto==0?'solicitud':'incidencia';
+$entidad=$inc->origen=='S'?'solicitud':'incidencia';
 $puesto=DB::table('puestos')
 ->join('edificios','puestos.id_edificio','edificios.id_edificio')
 ->join('plantas','puestos.id_planta','plantas.id_planta')
@@ -23,7 +23,7 @@ $usuario=users::find($inc->id_usuario_apertura);
 @endsection
 
 @section('saludo')
-    Hola {{$usuario->name}}!
+    Hola!
 @endsection
 
 @section('titulo')
@@ -35,7 +35,7 @@ $usuario=users::find($inc->id_usuario_apertura);
 
 @section('cuerpo')
     <p style="font-size: 14px; line-height: 160%;"> </p>
-    <p style="font-size: 14px; line-height: 160%;">{{ $usuario->name }} ( <a href="mailto:{{ $usuario->email }}"> {{ $usuario->email }} </a> ) ha creado una {{ $entidad }} de tipo <span style="color:#6488C0"><strong>{{ $tipo->des_tipo_incidencia }}</strong>:</span></p></p>
+    <p style="font-size: 14px; line-height: 160%;">Se ha creado una {{ $entidad }} de tipo <span style="color:#6488C0"><strong>{{ $tipo->des_tipo_incidencia }}</strong>:</span></p></p>
     <br>
     <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:18px"><strong>Cliente:</strong> {{ $inc->des_cliente }}</p>
     @if($inc->id_puesto!=0)

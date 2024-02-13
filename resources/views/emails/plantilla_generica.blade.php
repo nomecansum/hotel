@@ -9,7 +9,7 @@
 @endsection
 
 @section('saludo')
-    Hola {{$usuario->name}}!
+    Hola!
 @endsection
 
 @section('titulo')

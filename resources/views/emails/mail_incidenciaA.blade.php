@@ -4,7 +4,7 @@ use App\Models\incidencias;
 use App\Models\incidencias_acciones;
 use App\Models\users;
 
-$entidad=$inc->id_puesto==0?'solicitud':'incidencia';
+$entidad=$inc->origen=='S'?'solicitud':'incidencia';
 
 //$inc=incidencias::find(3);
 $accion=incidencias_acciones::where('id_incidencia',$inc->id_incidencia)->orderby('num_accion','desc')->first();

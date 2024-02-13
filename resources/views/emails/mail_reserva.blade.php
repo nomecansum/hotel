@@ -21,7 +21,7 @@ $puesto=DB::table('reservas')
 @endsection
 
 @section('saludo')
-    Hola {{$user->name}}!
+    Hola!
 @endsection
 
 @section('titulo')
@@ -33,7 +33,7 @@ $puesto=DB::table('reservas')
     <p style="font-size: 14px; line-height: 160%;"> </p>
     <p style="font-size: 14px; line-height: 160%;">{!! $body !!}</p>
     <br>
-    <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:18px"><strong>Puesto:</strong> {{ nombrepuesto($puesto) }}, edificio {{ $puesto->des_edificio  }} | {{ $puesto->des_planta }}</p>
+    <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:18px"><strong>Espacio:</strong> {{ nombrepuesto($puesto) }}, edificio {{ $puesto->des_edificio  }} | {{ $puesto->des_planta }}</p>
     <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px"><strong>Fecha:</strong> {!! beauty_fecha($puesto->fec_reserva)!!} - {!! beauty_fecha($puesto->fec_fin_reserva)!!}</p>
 @endsection
 

@@ -42,9 +42,9 @@
                     </div>
                     <div class="row">
                        
-                        <div class="pull-right floating-like-gmail mt-3" style="width: 400px;">
-                            <div class="btn-group btn-group pull-right ml-1" role="group">
-                                <a href="#" title="Ver incidencia " data-id="{{ $inc->id_incidencia }}" class="btn btn-xs btn-info add-tooltip btn_edit"><span class="fa fa-eye pt-1" aria-hidden="true"></span> Ver</a>
+                        <div class="pull-right mt-3" style="width: 400px;">
+                            <div class="btn-group btn-group pull-right float-end   ml-1" role="group">
+                                <a href="#" title="Ver incidencia " data-id="{{ $inc->id_incidencia }}" class="btn btn-xs btn-primary add-tooltip btn_edit"><span class="fa fa-eye pt-1" aria-hidden="true"></span> Ver</a>
                                 {{-- @if (!isset($inc->fec_cierre))<a href="#accion-incidencia" title="Acciones incidencia" data-toggle="modal" class="btn btn-xs btn-warning add-tooltip btn-accion" data-desc="{{ $inc->des_incidencia}}" data-id="{{ $inc->id_incidencia}}" id="boton-accion{{ $inc->id_incidencia }}" onclick="accion_incidencia({{ $inc->id_incidencia}})"><span class="fad fa-plus pt-1" aria-hidden="true"></span> Accion</a>@endif
                                 @if (isset($inc->fec_cierre) )<a href="#reabrir-incidencia" title="Reabrir incidencia" data-toggle="modal" class="btn btn-xs btn-success add-tooltip btn-reabrir" data-desc="{{ $inc->des_incidencia}}" data-id="{{ $inc->id_incidencia}}" id="boton-reabrir{{ $inc->id_incidencia }}" onclick="reabrir_incidencia({{ $inc->id_incidencia}})"><i class="fad fa-external-link-square-alt"></i> Reabrir</a>@endif
                                 @if (!isset($inc->fec_cierre))<a href="#cerrar-incidencia" title="Cerrar incidencia" data-toggle="modal" class="btn btn-xs btn-success add-tooltip btn-cierre" data-desc="{{ $inc->des_incidencia}}" data-id="{{ $inc->id_incidencia}}" id="boton-cierre{{ $inc->id_incidencia }}" onclick="cierre_incidencia({{ $inc->id_incidencia}})"><span class="fad fa-thumbs-up pt-1" aria-hidden="true"></span> Cerrar</a>@endif --}}

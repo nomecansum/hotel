@@ -853,7 +853,6 @@ class IncidenciasController extends Controller
                 $incidencia->fec_audit=Carbon::now();
                 $incidencia->id_estado=$r->id_estado;
                 $incidencia->save();
-                
             }
             $accion->save();
             $this->post_procesado_incidencia($incidencia,$accion_postprocesado,$procedencia,$cambio_estado);
@@ -869,6 +868,7 @@ class IncidenciasController extends Controller
         } catch (\Exception $e) {
 
             savebitacora('ERROR: Ocurrio un error añadiendo la accion '.$e->getMessage() ,"Incidencias","add_accion","ERROR");
+            Log::error('ERROR: Ocurrio un error añadiendo la accion '.$e->getMessage());
             return [
                 'title' => "Añadir accion",
                 'error' => 'ERROR: Ocurrio un error añadiendo la accion '.$e->getMessage(),
@@ -916,17 +916,18 @@ class IncidenciasController extends Controller
         $postprocesado=DB::table('incidencias_postprocesado')
             ->where('id_tipo_incidencia',$tipo->id_tipo_incidencia)
             ->where('val_momento',$momento)
-            ->when($estado,function($q) use($estado){
+            ->when(($estado && $momento=='E'),function($q) use($estado){
                 $q->where(function($q2) use($estado){
                     $q2->where('id_estado',$estado);
                     $q2->orwhere('id_estado',-1);
                 });
             })
             ->get();
+
     
         
         foreach($postprocesado as $p){
-            Log::debug('Postprocesado ['.$p->id_proceso.']'.$p->tip_metodo. ' prodecencia: '.$procedencia);
+            Log::debug('Postprocesado ['.$p->id_proceso.']'.$p->tip_metodo. ' | prodecencia: '.$procedencia.' | momento:'.$momento);
             if (($procedencia=='api' && $p->mca_api!='S') || ($procedencia=='salas' && $p->mca_salas!='S')){
                 //Esto es para no mandarla al mismo sitio del que viene;
                 Log::debug('saltamos ['.$p->id_proceso.']'.$p->tip_metodo. ' porque la procedencia de la solicitud es'.$procedencia);
@@ -950,7 +951,7 @@ class IncidenciasController extends Controller
                             ->pluck('email')
                             ->toarray(); 
 
-                        if($abriente->id_usuario_supervisor!=null){
+                        if($abriente!=null && $abriente->id_usuario_supervisor!=null){
                             $supervisor=DB::table('users')
                                 ->where('id',$abriente->id_usuario_supervisor)
                                 ->first()
@@ -959,12 +960,24 @@ class IncidenciasController extends Controller
                             $supervisor=null;
                         }
 
-                        
+                        //Si es una incidencia de un cliente, vamos a ver si tiene configurado el envio de mail
+                        if($inc->pin!=null){
+                            //Buscamos la reserva con este pin y para este puesto
+                            $mireserva=DB::table('reservas')
+                                ->where('id_puesto',$inc->id_puesto)
+                                ->where('fec_reserva','<=',Carbon::now()->format('Y-m-d'))
+                                ->where('fec_fin_reserva','>=',Carbon::now()->format('Y-m-d'))
+                                ->where('pin',strtoupper($inc->pin))
+                                ->first();
+                            if($mireserva->email!=null){
+                                $to_email[]=$mireserva->email;
+                            }
+                        }
 
                         Log::info("Iniciando postprocesado MAIL de incidencia ".$inc->id_incidencia);
                         //Si se han marcado las casillas de enviar al abriente o a los afectados, vamos a ver quienes son
                         //y los añadimos al to_email
-                        if($p->mca_abriente=='S'){
+                        if($p->mca_abriente=='S' && $abriente!=null){
                             $to_email[]=$abriente->email;
                         }
                         if($p->mca_implicados=='S'){
@@ -982,11 +995,13 @@ class IncidenciasController extends Controller
                         Log::debug('Destinatarios '.$to_email);
 
                         //Ahora adaptamos el subject en funncion de si es incidnecia o solicitud
-                        if($inc->id_puesto==0){
+                        if($inc->origen=='S'){
                             $subject='Solicitud #'.$inc->id_incidencia.' de '.$tipo->des_tipo_incidencia;
                         } else {
                             $subject='Incidencia #'.$inc->id_incidencia.'en puesto '.$puesto->cod_puesto.' '.$puesto->des_edificio.' - '.$puesto->des_planta;
                         }
+
+                       
 
                         //Y le añadimos al subject indicacion de en que estado esta
                         switch($momento){
@@ -1013,7 +1028,7 @@ class IncidenciasController extends Controller
                                 $message->to('nomecansum@gmail.com')->subject($subject.' '.count(explode(';',$to_email)).' destinatarios');
                             } else {
                                 Log::debug('modo mail pro '.$to_email);
-                                $message->to(explode(';',$to_email), '')->subject($subject);
+                                $message->bcc(explode(';',$to_email), '')->subject($subject);
                             }
                             $message->from(config('mail.from.address'),config('mail.from.name'));
                             if($momento=='C'){
@@ -1167,7 +1182,7 @@ class IncidenciasController extends Controller
                             $inc->mca_sincronizada='S';
                         } catch(\Throwable $e){
                             Log::error("Postprocesado SALAS de incidencia ".$inc->id_incidencia."  ERROR: ".$e->getMessage());
-                            //dump($e);
+                            // dump($e);
                         }
                         
                         break;
@@ -1178,7 +1193,7 @@ class IncidenciasController extends Controller
                 }
             } catch(\Throwable $e){
                 Log::error("Postprocesado de incidencia ".$inc->id_incidencia." ERROR: ".$e->getMessage());
-                //dump($e);
+                // dump($e);
             }
         }
         $inc->save();

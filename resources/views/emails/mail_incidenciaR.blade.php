@@ -14,7 +14,7 @@ $puesto=DB::table('puestos')
 ->where('id_puesto',$inc->id_puesto)
 ->first();
 $usuario=users::find($inc->id_usuario_apertura);
-$entidad=$inc->id_puesto==0?'solicitud':'incidencia';
+$entidad=$inc->origen=='S'?'solicitud':'incidencia';
 @endphp
 
 
@@ -23,7 +23,7 @@ $entidad=$inc->id_puesto==0?'solicitud':'incidencia';
 @endsection
 
 @section('saludo')
-    Hola {{$usuario->name}}!
+    Hola!
 @endsection
 
 @section('titulo')
