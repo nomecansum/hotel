@@ -64,10 +64,14 @@
 			<div class="card-header">
 				<h3 class="card-title" style="text-transform: capitalize;">{{ $pagina }}</h3>
 			</div>
-			<form method="post" name="form_puestos" id="formbuscador" action="{{ url($pagina) }}" class="form-horizontal ajax-filter ml-3 mt-2">
+			<form method="post" name="form_puestos" id="formbuscador" action="{{ url($pagina) }}" class="form-horizontal ml-3 mt-2">
 				@csrf
 				<input type="hidden" name="document" value="pantalla">
 				<input type="hidden" name="output" value="pantalla">
+				@if(isset($tipo) && $tipo=='mis')
+					<input type="hidden" name="user[]" value="{{ Auth::user()->id }}">
+					<input type="hidden" name="tipo_vista" value="mis">
+				@endif
 				@if($mostrar_filtros==1)
 					@if($pagina=='solicitudes')
 						@include('resources.combos_filtro',[$hide=['est_mark'=>1,'tip_mark'=>1,'edi'=>1,'pla'=>1,'tag'=>1,'pue'=>1,'tip'=>1,'est'=>1],$show=['proc'=>1]])
@@ -85,9 +89,9 @@
 							<div class="form-group">
 								<label>Situacion</label>
 								<select class="form-control" id="ac" name="ac">
-										<option value="A" >Abiertas</option>
-										<option value="C" >Cerradas</option>
-										<option value="B" >Todas</option>
+										<option value="A" {{ isset($r->ac) && $r->ac=='A'?'selected':'' }} >Abiertas</option>
+										<option value="C" {{ isset($r->ac) && $r->ac=='C'?'selected':'' }}>Cerradas</option>
+										<option value="B" {{ isset($r->ac) && $r->ac=='B'?'selected':'' }}>Todas</option>
 								</select>
 							</div>
 						</div>
@@ -96,6 +100,7 @@
 			</form>
 			<div class="card-body">
 				@if($pagina=='incidencias')
+				
 					<table id="tabla"  
 						data-toggle="table" 
 						data-mobile-responsive="true"
@@ -103,7 +108,7 @@
 						data-search="true"
 						data-show-columns="true"
 						data-show-columns-toggle-all="true"
-						data-page-list="[5, 10, 20, 30, 40, 50]"
+						data-page-list="[5, 10, 20, 30, 40, 50, 100, 200, 500, 1000]"
 						data-page-size="50"
 						data-pagination="true" 
 						data-show-toggle="true"
@@ -119,6 +124,9 @@
 								<th data-sortable="true">Planta</th>
 								<th data-sortable="true">Fecha</th>
 								<th data-sortable="true">Situacion</th>
+								<th data-sortable="true">Tiempo</th>
+								<th data-sortable="true">Ult. actividad</th>
+								<th data-sortable="true">Acciones</th>
 								<th style="width: 30%" data-sortable="true">Incidencia</th>
 							</tr>
 						</thead>
@@ -150,6 +158,9 @@
 								<th data-sortable="true">Fecha</th>
 								<th data-sortable="true">Usuario</th>
 								<th data-sortable="true">Situacion</th>
+								<th data-sortable="true">Tiempo</th>
+								<th data-sortable="true">Ult. actividad</th>
+								<th data-sortable="true">Acciones</th>
 								<th style="width: 30%" data-sortable="true">Solicitud</th>
 							</tr>
 						</thead>
@@ -164,8 +175,6 @@
 		
 	</div>
 </div>
-
-
 
 
 <div class="modal fade" id="cerrar-incidencia" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -263,6 +272,7 @@
 		</div>
 	</div>
 </div>
+
 @endsection
 
 @section('scripts')
@@ -480,5 +490,22 @@
 	@endif
 
 	</script>
+
+{{-- Ahora con javascript vamos a rellenar los valores de los combos de filtro en base a lo que viene en la request --}}
+
+@foreach($r->all() as $key=>$value)
+	@if($key!='_token' && $key!='_method' && $key!='page' && $key!='output' && $key!='document' && $key!='tipo_vista')
+		{{-- Si es un array hay que hacerlo para cada elemento --}}
+		@if(is_array($value))
+			<script>
+				$('[name="{{ $key }}[]"]').val({!! js_array($value) !!});
+			</script>
+		@else
+			<script>
+				$('[name="{{ $key }}"]').val('{{ $value }}');
+			</script>
+		@endif
+	@endif
+@endforeach
 
 @endsection

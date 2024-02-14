@@ -125,6 +125,7 @@ class IncidenciasController extends Controller
         $incidencias=DB::table('incidencias')
             ->select('incidencias.*','incidencias_tipos.*','puestos.id_puesto','puestos.cod_puesto','puestos.des_puesto','edificios.*','plantas.*','estados_incidencias.des_estado as estado_incidencia','causas_cierre.des_causa','users.name')
             ->selectraw("date_format(fec_apertura,'%Y-%m-%d') as fecha_corta")
+            ->selectraw("(select count(id_accion) from incidencias_acciones where incidencias_acciones.id_incidencia=incidencias.id_incidencia) as num_acciones")
             ->leftjoin('incidencias_tipos','incidencias.id_tipo_incidencia','incidencias_tipos.id_tipo_incidencia')
             ->leftjoin('causas_cierre','incidencias.id_causa_cierre','causas_cierre.id_causa_cierre')
             ->leftjoin('estados_incidencias','incidencias.id_estado','estados_incidencias.id_estado')
@@ -141,6 +142,7 @@ class IncidenciasController extends Controller
                     $q->where('puestos.id_cliente',session('CL')['id_cliente']);
                 }
             })
+            ->where('incidencias.origen','I')
             ->whereBetween('fec_apertura',[$f1,$fhasta])
             ->wherenull('incidencias.fec_cierre')
             ->orderby('fec_apertura','desc')
@@ -149,6 +151,7 @@ class IncidenciasController extends Controller
         $solicitudes=DB::table('incidencias')
             ->select('incidencias.*','incidencias_tipos.*','estados_incidencias.des_estado as estado_incidencia','causas_cierre.des_causa','users.name')
             ->selectraw("date_format(fec_apertura,'%Y-%m-%d') as fecha_corta")
+            ->selectraw("(select count(id_accion) from incidencias_acciones where incidencias_acciones.id_incidencia=incidencias.id_incidencia) as num_acciones")
             ->leftjoin('incidencias_tipos','incidencias.id_tipo_incidencia','incidencias_tipos.id_tipo_incidencia')
             ->leftjoin('causas_cierre','incidencias.id_causa_cierre','causas_cierre.id_causa_cierre')
             ->leftjoin('users','incidencias.id_usuario_apertura','users.id')
@@ -161,7 +164,7 @@ class IncidenciasController extends Controller
                     $q->where('incidencias.id_cliente',session('CL')['id_cliente']);
                 }
             })
-            ->where('incidencias.id_puesto',0)
+            ->where('incidencias.origen','S')
             ->whereBetween('fec_apertura',[$f1,$fhasta])
             ->wherenull('incidencias.fec_cierre')
             ->orderby('fec_apertura','desc')
@@ -195,7 +198,8 @@ class IncidenciasController extends Controller
         }
         
         $tipo='embed';
-        return view('incidencias.index',compact('incidencias','f1','f2','puestos','mostrar_graficos','mostrar_filtros','titulo_pagina','tipo','solicitudes','pagina'));
+        $r=new Request();
+        return view('incidencias.index',compact('incidencias','f1','f2','puestos','mostrar_graficos','mostrar_filtros','titulo_pagina','tipo','solicitudes','pagina','r'));
     }
 
     public function mis_incidencias($f1=0,$f2=0){
@@ -206,6 +210,7 @@ class IncidenciasController extends Controller
         $incidencias=DB::table('incidencias')
             ->select('incidencias.*','incidencias_tipos.*','puestos.id_puesto','puestos.cod_puesto','puestos.des_puesto','edificios.*','plantas.*','estados_incidencias.des_estado as estado_incidencia','causas_cierre.des_causa','users.name')
             ->selectraw("date_format(fec_apertura,'%Y-%m-%d') as fecha_corta")
+            ->selectraw("(select count(id_accion) from incidencias_acciones where incidencias_acciones.id_incidencia=incidencias.id_incidencia) as num_acciones")
             ->leftjoin('incidencias_tipos','incidencias.id_tipo_incidencia','incidencias_tipos.id_tipo_incidencia')
             ->leftjoin('causas_cierre','incidencias.id_causa_cierre','causas_cierre.id_causa_cierre')
             ->leftjoin('estados_incidencias','incidencias.id_estado','estados_incidencias.id_estado')
@@ -222,6 +227,7 @@ class IncidenciasController extends Controller
                     $q->where('puestos.id_cliente',session('CL')['id_cliente']);
                 }
             })
+            ->where('incidencias.origen','I')
             ->whereBetween('fec_apertura',[$f1,$fhasta])
             ->where('incidencias.id_usuario_apertura',Auth::user()->id)
             ->wherenull('incidencias.fec_cierre')
@@ -231,6 +237,7 @@ class IncidenciasController extends Controller
         $solicitudes=DB::table('incidencias')
             ->select('incidencias.*','incidencias_tipos.*','estados_incidencias.des_estado as estado_incidencia','causas_cierre.des_causa','users.name')
             ->selectraw("date_format(fec_apertura,'%Y-%m-%d') as fecha_corta")
+            ->selectraw("(select count(id_accion) from incidencias_acciones where incidencias_acciones.id_incidencia=incidencias.id_incidencia) as num_acciones")
             ->leftjoin('incidencias_tipos','incidencias.id_tipo_incidencia','incidencias_tipos.id_tipo_incidencia')
             ->leftjoin('causas_cierre','incidencias.id_causa_cierre','causas_cierre.id_causa_cierre')
             ->leftjoin('users','incidencias.id_usuario_apertura','users.id')
@@ -243,7 +250,7 @@ class IncidenciasController extends Controller
                     $q->where('incidencias.id_cliente',session('CL')['id_cliente']);
                 }
             })
-            ->where('incidencias.id_puesto',0)
+            ->where('incidencias.origen','S')
             ->where('incidencias.id_usuario_apertura',Auth::user()->id)
             ->whereBetween('fec_apertura',[$f1,$fhasta])
             ->wherenull('incidencias.fec_cierre')
@@ -382,6 +389,7 @@ class IncidenciasController extends Controller
         $incidencias=DB::table('incidencias')
             ->select('incidencias.*','incidencias_tipos.*','puestos.id_puesto','puestos.cod_puesto','puestos.des_puesto','edificios.*','plantas.*','estados_incidencias.des_estado as estado_incidencia','estados_incidencias.id_estado_salas as id_estado_salas','causas_cierre.des_causa','users.name')
             ->selectraw("date_format(fec_apertura,'%Y-%m-%d') as fecha_corta")
+            ->selectraw("(select count(id_accion) from incidencias_acciones where incidencias_acciones.id_incidencia=incidencias.id_incidencia) as num_acciones")
             ->leftjoin('estados_incidencias','incidencias.id_estado','estados_incidencias.id_estado')
             ->leftjoin('causas_cierre','incidencias.id_causa_cierre','causas_cierre.id_causa_cierre')
             ->join('incidencias_tipos','incidencias.id_tipo_incidencia','incidencias_tipos.id_tipo_incidencia')
@@ -426,6 +434,7 @@ class IncidenciasController extends Controller
                     $q->whereIn('incidencias.id_usuario_apertura',$r->user);
                 }
             })
+            ->where('incidencias.origen','I')
             ->orderby('fec_apertura','desc')
             ->where('incidencias.id_puesto','>',0)
             ->get();
@@ -433,6 +442,7 @@ class IncidenciasController extends Controller
         $solicitudes=DB::table('incidencias')
             ->select('incidencias.*','incidencias_tipos.*','estados_incidencias.des_estado as estado_incidencia','estados_incidencias.id_estado_salas as id_estado_salas','causas_cierre.des_causa','users.name')
             ->selectraw("date_format(fec_apertura,'%Y-%m-%d') as fecha_corta")
+            ->selectraw("(select count(id_accion) from incidencias_acciones where incidencias_acciones.id_incidencia=incidencias.id_incidencia) as num_acciones")
             ->leftjoin('estados_incidencias','incidencias.id_estado','estados_incidencias.id_estado')
             ->leftjoin('causas_cierre','incidencias.id_causa_cierre','causas_cierre.id_causa_cierre')
             ->join('incidencias_tipos','incidencias.id_tipo_incidencia','incidencias_tipos.id_tipo_incidencia')
@@ -443,7 +453,7 @@ class IncidenciasController extends Controller
                     $q->where('incidencias.id_cliente',Auth::user()->id_cliente);
                 }
             })
-            ->where('incidencias.id_puesto',0)
+            ->where('incidencias.origen','S')
             ->whereBetween('fec_apertura',[Carbon::parse($f1),Carbon::parse($f2)])
             ->where(function($q) use($r){
                 if($r->ac=='C'){
@@ -487,17 +497,18 @@ class IncidenciasController extends Controller
         if(\Request::route()->getName()=='incidencias.search'){
             $titulo_pagina="Ver incidencias";
             $pagina="incidencias";
-            $template='incidencias.fill_tabla_incidencias';
+            //$template='incidencias.fill_tabla_incidencias';
         } else {
             $titulo_pagina="Ver solicitudes";
             $pagina="solicitudes";
-            $template='incidencias.fill_tabla_solicitudes';
+            //$template='incidencias.fill_tabla_solicitudes';
         }
-
+        $tipo=$r->tipo_vista??'embed';
+        $template='incidencias.index';
         if ($r->wantsJson()) {
             return ["incidencias"=>$incidencias,"solicitudes"=>$solicitudes];
         } else {
-            return view($template,compact('incidencias','f1','f2','puestos','r','mostrar_graficos','mostrar_filtros','titulo_pagina','pagina','solicitudes'));
+            return view($template,compact('incidencias','f1','f2','puestos','r','mostrar_graficos','mostrar_filtros','titulo_pagina','pagina','solicitudes','tipo'));
         }
         
     }

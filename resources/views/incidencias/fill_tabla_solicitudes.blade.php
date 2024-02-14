@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+    use Carbon\CarbonInterface;
+@endphp
 @foreach ($solicitudes as $inc)
     @php
         $descripcion="";
@@ -18,7 +22,9 @@
         <td>{!! beauty_fecha($inc->fec_apertura)!!}</td>
         <td>{{ $inc->name }}</td>
         <td>@if(isset($inc->fec_cierre)) <div class="bg-success text-xs text-white text-center rounded b-all" style="padding: 5px" id="cell{{$inc->id_incidencia}}">Cerrada</div> @else  <div class="bg-pink  text-xs text-white text-center rounded b-all"  style="padding: 5px" id="cell{{$inc->id_incidencia}}">Abierta </div>@endif</td>  
-        
+        <td>{{ Carbon::now()->diffforHumans(Carbon::parse($inc->fec_apertura), CarbonInterface::DIFF_ABSOLUTE) }}</td>
+        <td>{!! $inc->fec_audit==null?'':beauty_fecha($inc->fec_audit) !!}</td>
+        <td>{{ $inc->num_acciones }}</td>
         <td style="position: relative; vertical-align: middle" class="pt-2">
             {{ $descripcion}}
             <div class="pull-right floating-like-gmail mt-3" style="width: 400px;">

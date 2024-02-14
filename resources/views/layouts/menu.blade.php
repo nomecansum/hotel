@@ -152,7 +152,7 @@
                         <ul class="mininav-content nav collapse">
                                 @if(checkPermissions(['Informes > Reservas canceladas'],['R']))<li class=" nav-item informes"><a href="/reports/canceladas" class="text-nowrap nav-link inf_reservas"><i class="fa-light fa-file-alt"></i> Reservas canceladas</a></li> @endif
                                 @if(checkPermissions(['Informes > Trabajos planificados'],['R']))<li class=" nav-item informes"><a href="/reports/trabajos" class="text-nowrap nav-link inf_trabajos"><i class="fa-light fa-file-alt"></i> Trabajos planificados</a></li> @endif
-                                @if(checkPermissions(['Informes > Incidencias'],['R']))<li class=" nav-item informes"><a href="/reports/incidencias" class="text-nowrap nav-link inf_incidencias"><i class="fa-light fa-file-alt"></i> Incidencias</a></li> @endif
+                                @if(checkPermissions(['Informes > Incidencias'],['R']))<li class=" nav-item informes"><a href="/reports/incidencias" class="text-nowrap nav-link inf_incidencias"><i class="fa-light fa-file-alt"></i> Incidencias y solicitudes</a></li> @endif
                                
                                 @if(checkPermissions(['Informes programados'],["R"]))<li class=" nav-item informes"><a href="{{url('prog_report')}}" class="text-nowrap nav-link inf_programados"><i class="fa-light fa-envelope"></i> Informes Programados</a></li>@endif
                         </ul>

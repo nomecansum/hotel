@@ -103,6 +103,7 @@
 		<th>Espacio</th>
 		<th>Estado</th>
 		<th>Tiempo</th>
+		<th>Ult. actividad</th>
 		<th>Acciones</th>
 	</tr>
 	@foreach ($inf as $dato)
@@ -111,7 +112,8 @@
 			<td>{{ $dato->des_tipo_incidencia }}</td>
 			<td>{{ $dato->cod_puesto }}</td>
 			<td>{{ $dato->fec_cierre==null?'Abierta':'Cerrada' }}</td>
-			<td>{{ Carbon::parse($dato->fec_audit)->diffforHumans(Carbon::parse($dato->fec_apertura), CarbonInterface::DIFF_ABSOLUTE) }}</td>
+			<td>{{ Carbon::now()->diffforHumans(Carbon::parse($dato->fec_apertura), CarbonInterface::DIFF_ABSOLUTE) }}</td>
+			<td>{!! $dato->fec_audit==null?'':beauty_fecha($dato->fec_audit) !!}</td>
 			<td>{{ $dato->num_acciones }}</td>
 		</tr>
 		
