@@ -8,6 +8,7 @@ use App\Models\users;
 $puesto=DB::table('reservas')
 ->join('puestos','puestos.id_puesto','reservas.id_puesto')
 ->join('edificios','puestos.id_edificio','edificios.id_edificio')
+->join('puestos_tipos','puestos.id_tipo_puesto','puestos_tipos.id_tipo_puesto')
 ->join('plantas','puestos.id_planta','plantas.id_planta')
 ->join('estados_puestos','puestos.id_estado','estados_puestos.id_estado')
 ->join('clientes','puestos.id_cliente','clientes.id_cliente')
@@ -33,7 +34,7 @@ $puesto=DB::table('reservas')
     <p style="font-size: 14px; line-height: 160%;"> </p>
     <p style="font-size: 14px; line-height: 160%;">{!! $body !!}</p>
     <br>
-    <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:18px"><strong>Espacio:</strong> {{ nombrepuesto($puesto) }}, edificio {{ $puesto->des_edificio  }} | {{ $puesto->des_planta }}</p>
+    <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:18px"><strong>{{ $puesto->des_tipo_puesto }}:</strong> {{ nombrepuesto($puesto) }}, edificio {{ $puesto->des_edificio  }} | {{ $puesto->des_planta }}</p>
     <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px"><strong>Fecha:</strong> {!! beauty_fecha($puesto->fec_reserva)!!} - {!! beauty_fecha($puesto->fec_fin_reserva)!!}</p>
 @endsection
 

@@ -140,14 +140,14 @@
                     <div class="card-header">
                         <div class="form-group">
                             <div class="form-check pt-2">
-                                <input  name="mca_slots"   id="mca_slots" value="S" {{ isset($tipo->slots_reserva)?'checked':'' }}  class="form-check-input" type="checkbox">
+                                <input  name="mca_slots"   id="mca_slots" value="S" {{ (isset($tipo->slots_reserva) && $tipo->slots_reserva!="")?'checked':'' }}  class="form-check-input" type="checkbox">
                                 <label for="mca_slots" class="form-check-label">Slots de reserva</label>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body bg-gray-light" id="body_slots" style="{{ !isset($tipo->slots_reserva)?'display:none':'' }}">
+                    <div class="card-body bg-gray-light" id="body_slots" style="{{ (!isset($tipo->slots_reserva) || $tipo->slots_reserva=="")?'display:none':'' }}">
                         <div class="row d-flex flex-wrap" id="slots">
-                            @if(isset($tipo->slots_reserva))
+                            @if(isset($tipo->slots_reserva) && $tipo->slots_reserva!="")
                                 @php
                                     $tipo->slots_reserva=json_decode($tipo->slots_reserva);
                                 @endphp
