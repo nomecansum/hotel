@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="form-group col-md-12 {{ $errors->has('des_tipo_incidencia') ? 'has-error' : '' }}">
                             <label for="des_trabajo_cierre" class="control-label">Nombre</label>
-                            <input class="form-control" required name="des_trabajo" type="text" id="des_trabajo_cierre" value="{{ old('des_trabajo', optional($dato)->des_contrata) }}" maxlength="200" placeholder="Enter nombre here...">
+                            <input class="form-control" required name="des_contrata" type="text" id="des_trabajo_cierre" value="{{ old('des_contrata', optional($dato)->des_contrata) }}" maxlength="200" placeholder="Enter nombre here...">
                             {!! $errors->first('des_trabajo_cierre', '<p class="help-block">:message</p>') !!}
                         </div>
                     </div>
